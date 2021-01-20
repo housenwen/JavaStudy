@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/HeimaNetworkDisk/HeimaNetworkDisk.iml" filepath="$PROJECT_DIR$/HeimaNetworkDisk/HeimaNetworkDisk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day32.iml" filepath="$PROJECT_DIR$/day32.iml" />
+    </modules>
+  </component>
+</project>
