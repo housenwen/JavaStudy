@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格的合并</title>
+</head>
+<body>
+<!--
+表格的合并：
+colspan:跨列
+rowspan:跨行
+表格的嵌套：
+加table
+
+-->
+
+<table border="1px" width="400px" align="center" bgcolor="#ffe4c4">
+    <tr>
+        <td colspan="2">11</td>
+        <td>13</td>
+        <td>14</td>
+        <td>15</td>
+    </tr>
+    <tr>
+        <td>21</td>
+        <td colspan="2" rowspan="2">
+            <table border="1px" width="100%">
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+            </table>
+
+        </td>
+        <td>51</td>
+        <td>61</td>
+    </tr>
+    <tr>
+        <td>71</td>
+        <td>101</td>
+        <td rowspan="2">111</td>
+    </tr>
+    <tr>
+        <td>121</td>
+        <td>131</td>
+        <td>141</td>
+        <td>151</td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册入门案例</title>
+</head>
+<body>
+<!--表单标签
+action：直接提交的地址
+method：get方式  默认提交方式 会将参数拼接在链接后面，有大小限制 4K
+       post方式  方式 将会参数封装到请求体中，没有这样的限制
+
+       input:
+type: 指定输入项的类型
+text
+password
+number
+tel
+radio
+checkbox
+date
+submit
+button
+reset
+hidden
+
+name: 在表单提交的时候，当作参数的名称
+id：   给输入项取名，以便于后期能操作。
+value:
+placeholder:指定默认提示信息
+textarea:文本域
+cols:指定宽度
+rows：指定高度
+select:
+option
+
+-->
+<form action="友商链接.html" target="_blank" method="post">
+<!--
+隐藏域，
+主要是用来存放页面上一些ID信息
+-->
+    <input type="hidden" value="asdf234bvw" name="uid">
+<!--文本输入框-->
+用户名：<input type="text" name="username"/><br/>
+<!--密码框-->
+密码：<input type="password" placeholder="请输入密码"/><br/>
+确认密码：<input type="password"/><br/>
+邮箱：<input type="text"/><br/>
+手机：<input type="number"/><br/>
+    QQ：<input type="tel"/><br/>
+
+照片：<input type="file"/><br/>
+
+性别：<input type="radio" name="sex"/>男
+性别：<input type="radio" name="sex"/>女
+性别：<input type="radio" name="sex"/>人妖<br/>
+
+爱好：<input type="checkbox"/>抽烟
+<input type="checkbox"/>喝酒
+<input type="checkbox"/>烫头
+<input type="checkbox"/>大保健<br/>
+
+择偶要求：
+<textarea cols="40" rows="4"></textarea>
+<br/>
+籍贯：
+<select>
+    <option>请选择</option>
+    <option>北京市</option>
+    <option>上海市</option>
+    <option>南京市</option>
+</select>
+<br/>
+    出生日期：<input type="date"><br/>
+
+验证码：<input type="text" /><br/>
+<input type="submit" value="注册">
+<input type="button" value="普通按钮">
+<input type="reset" value="重置按钮">
+</form>
+</body>
+</html>
