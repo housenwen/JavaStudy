@@ -1,0 +1,167 @@
+
+create table student(
+    sid int primary key ,
+    sname varchar(10),
+    sex int,
+    age int
+);
+#todo 商品分类
+# 1.分类的ID
+# 2.分类的名称
+# 3.分类的描述
+create table category(
+    cid int primary key auto_increment,
+    cname varchar(100),
+    cdesc varchar(100)
+);
+insert into category values(null,'手机数码','电子产品，黑马出品');
+insert into category values(null,'衣服箱包','江南皮革厂出品');
+insert into category values(null,'香烟酒水','黄鹤楼,茅台,二锅头');
+insert into category values(null,'酸奶饼干','哇哈哈,蒙牛酸酸乳');
+insert into category values(null,'馋嘴零食','瓜子,花生,八宝粥，辣条');
+
+select * from category;
+
+
+#todo 所有商品
+# 1.商品ID
+# 2.商品名称
+# 3.商品的价格
+# 4.生产日期
+# 5.商品分类ID
+
+# todo 商品和商品的所属分类：所属关系
+create table product(
+    pid int primary key auto_increment,
+    pname varchar(100),
+    price double,
+    pdate timestamp,
+    cno int
+);
+
+insert into product values (null,'小米mix9',998,null,1);
+insert into product values (null,'锤子手机',2888,null,1);
+insert into product values (null,'阿迪王',99,null,2);
+insert into product values (null,'老村长',88,null,3);
+insert into product values (null,'劲酒',35,null,3);
+insert into product values (null,'小熊饼干',1,null,4);
+insert into product values (null,'威龙辣条',1,null,5);
+insert into product values (null,'旺旺饼干',1,null,5);
+
+#todo 查询所有商品
+select * from product;
+#todo 查询商品名称和商品价格
+select pname,price from product;
+
+#todo 别名查询 as 关键字。可以省略as
+# select p.pname,p.price from product as p;
+
+# 列别名 省略as
+select pname as 商品名称,price as 商品价格 from product;
+
+#todo 去掉重复的值
+# 查询所有商品的价格
+select price from product;
+# 去掉重复的价格商品
+select distinct price from product;
+
+# 运算查询 仅仅在运算结果上做了运算 +-*/
+select *,price*1.5 as 折后价 from product;
+select *,price*0.8 as 折后价 from product;
+
+#todo 条件查询 where [关键字（boolean类型）]
+# 查询商品价格>60元的所有商品信息
+select * from product where price > 60 ;
+
+#todo where 后的条件写法
+# 关系运算符 ： > >= < <= != <>
+# <> 不等于：标准SQL语法
+# != 不标准SQL语法。
+
+# 查询商品价格在10-100之间 between and
+select *
+from product where price>10 and price<100;
+select *
+from product where price between 10 and 100;
+
+# 逻辑运算：and or not
+select *
+from product where price<35 or price>900;
+
+#todo like : 模糊查询
+# _ :代表的是一个字符
+# % :代表的是多个字符
+# 查询带有饼的商品
+select *
+from product where pname like '%饼%';
+# 查询第二名字是熊的所有商品 '_熊%'
+select *
+from product where pname like '_熊%';
+
+
+#todo in 在某个范围中获得值
+# 查询价格等于 1 88 99 这三个价格的所有商品
+select *
+from product where price in (1,88,99);
+# 查询出商品分类ID在1，4，5里面的所有商品
+select *
+from product where cno in (1,4,5);
+
+#todo 排序查询 ：order by 关键字
+# asc : ascend 升序 （默认的排序方式）
+# desc: descend 降序
+
+# 查询所有商品，安装价格进行排序
+select *
+from product order by price;
+# 1.查询所有的商品，按价格进行降序排序（asc-升序 desc-降序）;
+select *
+from product order by price desc;
+# 查询名称有小的商品 按价格降序排序
+select *
+from product where pname like '%小%' order by price desc ;
+
+#todo 聚合函数：
+# sum（）：求和
+# avg() : 求平均值
+# count() : 统计数量
+# max()：最大值
+# min():最小值
+
+# 1.获取所有商品的总和：
+select sum(price)
+from product;
+
+# 2.获得所有商品的平均价格：
+select avg(price)
+from product;
+
+# 3.获取所有商品的个数：
+select count(*) as 商品个数
+from product;
+
+# 查出所有商品价格大于平均价格的商品
+
+select *
+from product where price>513.87;
+select *
+from product where price>(select avg(price)from product);
+
+# todo 分组：group by
+# 1.根据 cno字段分组，分组后统计商品的个数
+select cno,count(*)
+from product group by cno;
+
+#todo 2.根据cno分组，分组统计每组商品的平均价格，平且商品的平均价格>60
+# having 关键字 可以接聚合函数， 出现在分组之后
+select cno,avg(price)
+from product group by cno
+having avg(price) > 60 ;
+
+
+#todo where 关键字 它是不可以接聚合函数 ， 出现在分组之前
+# from  where group by having select order by
+
+
+
+
