@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books>
+       <book id="01" 出版社="传智出版社">
+            <name>Java编程思想</name>
+            <author>James</author>
+            <price>98.00</price>
+            <body>库存：30</body>
+       </book>
+    <book id="02" 出版社="传智出版社">
+            <name>JavaEE从入门到精通</name>
+            <author>传智播客</author>
+            <price>40.00</price>
+            <body>库存：20</body>
+    </book>
+    <book id="03" 出版社="传智出版社">
+            <name>Java开发手册</name>
+            <author>阿里巴巴</author>
+            <price>15.00</price>
+            <body>库存：300</body>
+    </book>
+</books>

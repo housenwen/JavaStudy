@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE books SYSTEM "books.dtd">
+<books>
+    <book>
+        <bookName>架构师之路</bookName>
+        <press>黑马程序员</press>
+        <publicationDate>2010-01-12</publicationDate>
+        <price>128.00</price>
+    </book>
+    <book>
+        <bookName>JavaEE企业级开发</bookName>
+        <press>清华计算机</press>
+        <publicationDate>2011-5-5</publicationDate>
+        <price>123.00</price>
+    </book>
+    <book>
+        <bookName>Oracle指南</bookName>
+        <press>清华计算机</press>
+        <publicationDate>2012-2-3</publicationDate>
+        <price>192.00</price>
+    </book>
+</books>

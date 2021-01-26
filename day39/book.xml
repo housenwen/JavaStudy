@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books>
+       <book id="01" 出版社="传智出版社">
+            <name>Java变成思想</name>
+            <author>James</author>
+            <price>79.00</price>
+            <body>库存：30</body>
+       </book>
+</books>
