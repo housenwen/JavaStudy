@@ -1,0 +1,48 @@
+
+# 使用mysql命令,创建编码utf8的数据库webdb2,创建表users,完成相关查询
+# 要求: users表的字段  id  name  age   birthday   salary
+# 1:字段要求: id  int, age  int, name 字符类型, birthday 日期类型   salary double.
+# 2:录入初始化数据;
+# 3:查询所有员工的薪资,年薪,以及姓名
+# 4:查询员工张姓且薪资大于900的员工.
+# 5:查询生日在1990-1-1之前的员工信息.
+# 6:查询员工薪资小于1200 或者 大于5000的信息
+# 7:查询姓名以明结尾的员工信息.
+create table users(
+    id int primary key auto_increment,
+    name varchar(10),
+    age int,
+    birthday timestamp,
+    salary double
+);
+
+
+insert into users values (null,'张三',18,1990-1-1,2000);
+insert into users values (null,'李四',18,1980-1-1,4000);
+insert into users values (null,'王五',18,1970-1-1,1000);
+insert into users values (null,'赵六',18,1960-1-1,6000);
+insert into users values (null,'唐七',18,1996-1-1,7000);
+insert into users values (null,'刘八明',18,1997-1-1,1100);
+
+
+select *
+from users;
+
+select salary 工资,salary*12 年薪,name 姓名
+from users ;
+
+select *
+from users where salary>900;
+
+select *
+from users where birthday>1990-1-1;
+
+select *
+from users where salary<1200 or salary >5000;
+
+select *
+from users where name like '%明';
+
+
+
+

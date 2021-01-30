@@ -1,0 +1,71 @@
+
+#创建商品表：
+create table product(
+                        pid int,
+                        pname varchar(20),
+                        price double,
+                        category_id varchar(32)
+);
+INSERT INTO product(pid,pname,price,category_id) VALUES(1,'联想',5000,'c001');
+INSERT INTO product(pid,pname,price,category_id) VALUES(2,'海尔',3000,'c001');
+INSERT INTO product(pid,pname,price,category_id) VALUES(3,'雷神',5000,'c001');
+
+INSERT INTO product(pid,pname,price,category_id) VALUES(4,'JACK JONES',800,'c002');
+INSERT INTO product(pid,pname,price,category_id) VALUES(5,'真维斯',200,'c002');
+INSERT INTO product(pid,pname,price,category_id) VALUES(6,'花花公子',440,'c002');
+INSERT INTO product(pid,pname,price,category_id) VALUES(7,'劲霸',2000,'c002');
+
+INSERT INTO product(pid,pname,price,category_id) VALUES(8,'香奈儿',800,'c003');
+INSERT INTO product(pid,pname,price,category_id) VALUES(9,'相宜本草',200,'c003');
+INSERT INTO product(pid,pname,price,category_id) VALUES(10,'面霸',5,'c003');
+
+INSERT INTO product(pid,pname,price,category_id) VALUES(11,'好想你枣',56,'c004');
+INSERT INTO product(pid,pname,price,category_id) VALUES(12,'香飘飘奶茶',1,'c005');
+
+INSERT INTO product(pid,pname,price,category_id) VALUES(13,'果9',1,NULL);
+
+# 根据上述数据完成下面的查询练习
+# 1.查询商品名称为“花花公子”的商品所有信息：
+# 2.查询价格为800商品
+# 3.查询价格不是800的所有商品
+# 4.查询商品价格大于60元的所有商品信息
+# 5.查询商品价格在200到1000之间所有商品
+# 6.查询商品价格是200或800的所有商品
+# 7.查询含有'霸'字的所有商品
+# 8.查询以'香'开头的所有商品
+# 9.查询第二个字为'想'的所有商品
+
+select *
+from product where pname like '_想%';
+
+select *
+from product where pname like '香%';
+
+select *
+from product where pname like '%霸%';
+
+select *
+from product;
+
+select *
+from product where price = 800;
+
+select *
+from product where price<>800;
+
+select *
+from product where price>60;
+
+select *
+from product where price between 200 and 1000;
+
+select *
+from product where price or 200 or 800;
+
+
+
+
+
+
+
+
