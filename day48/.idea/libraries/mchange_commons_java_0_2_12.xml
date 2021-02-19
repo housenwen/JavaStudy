@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="mchange-commons-java-0.2.12">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/c3p0数据库连接池需要导入的jar包/mchange-commons-java-0.2.12.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

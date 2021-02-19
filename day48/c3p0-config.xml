@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c3p0-config>
+    <default-config>
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/day05_db</property>
+        <property name="user">root</property>
+        <property name="password">1234</property>
+    </default-config>
+
+    <named-config name="intergalactoApp">
+    </named-config>
+</c3p0-config>
