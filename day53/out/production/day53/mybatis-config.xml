@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--mybatis环境的配置-->
+    <environments default="development">
+        <!--通常我们只需要配置一个就可以了， id是环境的名字 -->
+        <environment id="development">
+            <!--事务管理器：由JDBC来管理-->
+            <transactionManager type="JDBC"/>
+            <!--数据源的配置：mybatis自带的连接池-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql:///day04_db"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--加载映射文件,放到src下即可-->
+        <mapper resource="userMapper.xml"/>
+    </mappers>
+</configuration>
+
+
+
+
+
+
