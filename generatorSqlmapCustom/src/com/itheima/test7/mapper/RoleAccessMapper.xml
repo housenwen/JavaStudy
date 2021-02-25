@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.test7.mapper.RoleAccessMapper" >
+  <resultMap id="BaseResultMap" type="com.itheima.test7.pojo.RoleAccess" >
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="access_id" property="accessId" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.itheima.test7.pojo.RoleAccess" >
+    insert into role_access_tb (role_id, access_id)
+    values (#{roleId,jdbcType=INTEGER}, #{accessId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itheima.test7.pojo.RoleAccess" >
+    insert into role_access_tb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="accessId != null" >
+        access_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="accessId != null" >
+        #{accessId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

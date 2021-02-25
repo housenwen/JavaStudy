@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.test7.mapper.AccessMapper" >
+  <resultMap id="BaseResultMap" type="com.itheima.test7.pojo.Access" >
+    <id column="access_id" property="accessId" jdbcType="INTEGER" />
+    <result column="access_name" property="accessName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    access_id, access_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from access
+    where access_id = #{accessId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from access
+    where access_id = #{accessId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.itheima.test7.pojo.Access" >
+    insert into access (access_id, access_name)
+    values (#{accessId,jdbcType=INTEGER}, #{accessName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itheima.test7.pojo.Access" >
+    insert into access
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accessId != null" >
+        access_id,
+      </if>
+      <if test="accessName != null" >
+        access_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accessId != null" >
+        #{accessId,jdbcType=INTEGER},
+      </if>
+      <if test="accessName != null" >
+        #{accessName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.test7.pojo.Access" >
+    update access
+    <set >
+      <if test="accessName != null" >
+        access_name = #{accessName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where access_id = #{accessId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itheima.test7.pojo.Access" >
+    update access
+    set access_name = #{accessName,jdbcType=VARCHAR}
+    where access_id = #{accessId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.test7.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.itheima.test7.pojo.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, user_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.itheima.test7.pojo.User"
+          useGeneratedKeys="true" keyColumn="user_id" keyProperty="userId">
+    insert into user (user_id, user_name)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR})
+  </insert>
+
+
+
+
+  <insert id="insertSelective" parameterType="com.itheima.test7.pojo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.test7.pojo.User" >
+    update user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itheima.test7.pojo.User" >
+    update user
+    set user_name = #{userName,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <select id="findUsersByRoleName" resultMap="BaseResultMap">
+    select
+      user.*
+    from user,
+      user_role_tb as ur,
+      role
+    where user.user_id = ur.user_id
+        and ur.role_id = role.role_id
+        and role.role_name = #{roleName}
+  </select>
+
+  <resultMap id="userInfoMap" type="user">
+    <id column="user_id" property="userId"/>
+    <result column="user_name" property="userName"/>
+    <!--一对多映射-->
+    <collection property="roleList" javaType="list" ofType="role">
+      <id column="role_id" property="roleId"/>
+      <result column="role_name" property="roleName"/>
+    </collection>
+    <collection property="accessList" javaType="list" ofType="access">
+      <id column="access_id" property="accessId"/>
+      <result column="access_name" property="accessName"/>
+    </collection>
+    <collection property="roleNames" javaType="list" ofType="string">
+      <result column="role_name"/>
+    </collection>
+
+  </resultMap>
+  <select id="findUserInfoByUserName" resultMap="userInfoMap">
+    select
+      u.*,
+      r.*,
+      a.*
+    from user as u,
+      user_role_tb as ur,
+      role as r,
+      role_access_tb as ra,
+      access as a
+    where u.user_id = ur.user_id
+        and ur.role_id = r.role_id
+        and r.role_id = ra.role_id
+        and ra.access_id = a.access_id
+        and u.user_name = #{userName}
+  </select>
+</mapper>

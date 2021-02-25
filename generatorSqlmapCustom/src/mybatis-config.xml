@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--方式1：在properties标签内部自定义全局参数-->
+    <!--<properties>
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+    </properties>-->
+    <!--方式2：通过resource属性加载外部的properties配置文件-->
+    <properties resource="config/jdbc.properties">
+    </properties>
+
+    <settings>
+        <!--设置开启驼峰映射-->
+        <!--规则：table:aa_bb_cc_dd 自动映射 pojo:aabbccdd/aaBbCcDd-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!--方式1：可以自定义别名的名称-->
+    <!--弊端：
+        有多少个pojo类就要写多少个自定义配置，非常麻烦
+    -->
+    <!--<typeAliases>
+        <typeAlias type="com.pojo.User" alias="TbUser"/>
+    </typeAliases>-->
+    <!--方式2：基于扫包方式取别名-->
+    <!--好处：
+        可以批量给pojo类取别名，方便维护
+        弊端：不能自定义别名
+    -->
+    <typeAliases>
+        <package name="com.itheima.test7.pojo"/>
+    </typeAliases>
+   <!--environments表示数据库的多环境配置标签 default指定默认的数据库环境-->
+    <environments default="dev">
+        <!--environment：具体配置环境的标签，dev表示开发环境-->
+        <environment id="dev">
+            <!--事务交给jdbc去管理-->
+            <transactionManager type="JDBC"/>
+            <!--dataSource：配置数据源 type='pooled':表示使用mybatis自带连接池-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driverClass}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.userName}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+        <!--environment：具体配置环境的标签，dev表示开发环境-->
+        <environment id="test">
+            <!--事务交给jdbc去管理-->
+            <transactionManager type="JDBC"/>
+            <!--dataSource：配置数据源 type='pooled':表示使用mybatis自带连接池-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driverClass}"/>
+                <property name="url" value="jdbc:mysql:///day06_1"/>
+                <property name="username" value="${jdbc.userName}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!--方式1：使用resource属性相对路径加载xml映射文件-->
+        <!--
+            弊端：有多少个mapper映射文件，就配置多少个mapper标签
+            好处：xml映射文件路径随便定义，同时名称随便定义
+            适合的场景：如果开始基于xml方式，推荐使用
+        -->
+        <!--<mapper resource="UserMapper.xml"/>-->
+
+        <!--方式2：基于url使用绝对路径加载xml映射文件-->
+        <!--
+            弊端：1）xml映射文件使用绝对路径，移植性差；【了解即可】
+        -->
+        <!--<mapper url="file:///E:\上课视频资料\124\day06\day06demo\src\UserMapper.xml"/>-->
+
+        <!--方式3：基于class属性指定接口的全限定名称 【了解即可】 -->
+        <!--
+           要求：通过加载mapper接口，可以获取xml映射文件的路径和文件名称
+           约定：
+            1.如果基于接口加载xml文件，那么mapper接口和xml映射文件路径要一致；
+            2.mapper接口的名称和xml映射文件名称也要一致；
+            弊端：
+                1）java文件与xml映射文件存放到一块，维护性差
+                2）前提约束条件太多了
+                3)有多少个xml，就需要写多少个，非常麻烦
+        -->
+        <!--<mapper class="com.mapper.UserMapper"/>-->
+
+        <!--方式4：基于package字标签 扫包方式批量加载接口，间接加载xml映射文件 【掌握，推荐基于注解开发时使用】-->
+        <!--约定：
+        1.如果基于接口加载xml文件，那么mapper接口和xml映射文件路径要一致；
+        2.mapper接口的名称和xml映射文件名称也要一致；
+        -->
+        <package name="com.itheima.test7.mapper"/>
+
+    </mappers>
+
+</configuration>
