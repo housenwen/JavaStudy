@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="">
+
+    <select id="xx">
+       select * from tb_user where sex=1
+       <if test="userName!=null">
+           and user_name like concat('%',#{userName},'%')
+       </if>
+    </select>
+
+</mapper>
