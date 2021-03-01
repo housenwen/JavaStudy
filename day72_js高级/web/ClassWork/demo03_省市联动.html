@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+省：<select id="province" onchange="addCity()">
+    <option value="">--请选择省--</option>
+</select>
+
+市：<select id="city">
+    <option value="">--请选择市--</option>
+</select>
+</body>
+<script src="cities.js"></script>
+<script>
+
+    //填充省的下拉列表框
+    function addProvince() {
+        let provinceStr = "<option value=''>--请选择省--</option>";
+        //遍历所有的省
+        for(let province of provinces){
+            provinceStr+="<option value='"+province.pid+"'>"+province.pname+"</option>"
+        }
+        //填充到省的下拉列表框里面
+        let provinceSelect = document.getElementById("province");
+        provinceSelect.innerHTML=provinceStr;
+    }
+
+    addProvince();
+
+
+    //省的内容改变，切换省对应的城市信息
+    function addCity() {
+        //获取当前选中的省的id
+        let provinceId = document.getElementById("province").value;
+        //遍历，获取对应省的城市信息数组
+        let cities;
+        for(let province of provinces){
+            if(province.pid==provinceId){
+                //获取当前选中的省的城市信息
+                cities = province.cities;
+            }
+        }
+        //遍历城市信息，填充到城市的下拉列表框下
+        let citySelect = document.getElementById("city");
+
+        let cityStr = "<option value=''>--请选择市--</option>";
+        for(let city of cities){
+            cityStr += "<option value='"+city.cid+"'>"+city.cname+"</option>"
+        }
+        citySelect.innerHTML=cityStr;
+    }
+
+</script>
+</html>

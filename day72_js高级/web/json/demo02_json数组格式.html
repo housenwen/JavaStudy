@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    /**
+     *  json数组格式:
+     [
+     {key:value,key:value},
+     {key:value,key:value},
+     {key:value,key:value}
+     ]
+
+     需求：描述3条狗，狗有名字(name)和种类(type)属性
+     */
+
+    let jsonArray = [
+        {
+            "name":"泰日天",
+            "type":"泰迪"
+        },
+        {
+            "name":"短腿",
+            "type":"柯基"
+        },
+        {
+            "name":"撕家",
+            "type":"二哈"
+        }
+
+    ];
+
+    //解析：数组，遍历即可。for循环
+    for(jsonObj of jsonArray){
+        console.log(jsonObj.name+"的品种是:"+jsonObj.type)
+    }
+
+</script>
+</html>

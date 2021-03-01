@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>07-dom操作样式</title>
+    <style>
+        #p1{ background-color: red;}
+        .mp {
+            color: green;
+            font-size: 30px;
+            font-family: 楷体;
+        }
+
+        .mpp {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+<body>
+
+<p id="p1">1. 设置一个css样式</p>
+<p id="p2" >2. 通过class设置样式</p>
+
+<script>
+    let p1 = document.getElementById("p1");//获取段落标签
+    let p2 = document.getElementById("p2");//获取段落标签
+
+
+    // 需求1. 设置一个css样式
+    p1.style.backgroundColor='black';
+    p1.style.color='white';
+
+
+    // 需求2. 通过class设置样式
+    p2.className='mp mpp'; // 注意不要画蛇添足：不要给我加. class="mp mpp"
+
+</script>
+</body>
+</html>

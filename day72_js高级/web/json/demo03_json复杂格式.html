@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    /**
+     *  json对象：
+     *      {key:value,key:value}
+     *  json数组：
+     *      [
+     *          {key:value,key:value},
+     *          {key:value,key:value},
+     *          {key:value,key:value}
+     *      ]
+     *
+     * value是任意数据格式
+     *
+     *  需求：
+     *      描述一个人，
+     *          有本身的username属性，password属性，isMarry属性
+     *          有2条狗，有dogName和dogType属性
+     *          有一辆车，有carType和price属性
+     *          有一个表演方法，打太极
+     *
+     */
+
+    let user = {
+        "username":"张三丰",  //字符串
+        "password":"123123",
+        "isMarry":true,  //布尔值
+        "car":{    //json对象
+            "carType":"BMW",
+            "price":"30w"
+        },
+        "dogs":[
+            {
+                "dogName":"泰日天",
+                "dogType":"泰迪"
+            },
+            {
+                "dogName":"撕家",
+                "dogType":"二哈"
+            }
+        ],
+        "actGongFu":function () {
+            alert("打太极")
+        }
+    }
+
+    //解析：
+    console.log("姓名："+user.username)
+    console.log("车品牌:"+user.car.carType);
+    console.log("是否结婚:"+user.isMarry);
+    console.log("有2只狗："+user.dogs[0].dogName+"和"+user.dogs[1].dogName);
+    user.actGongFu();
+    console.log("打太极");
+
+</script>
+</html>

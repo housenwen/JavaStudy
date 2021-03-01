@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn2" onclick="method03()">取消打印自然数</button>
+<img id="myImg" src="../img/bg1.png" width="600px">
+</body>
+<script>
+
+    let i=1;
+    function changeImg() {
+        //获取标签对象
+        let myImg = document.getElementById("myImg");
+        //循环获取图片地址的标识
+        if(i<6){
+            i++;
+        }else{
+            i=1;
+        }
+        //设置img标签的地址
+        myImg.src="../img/bg"+i+".png";
+    }
+
+    //定时器周期执行
+  let timer2 =  setInterval("changeImg()",2000);
+
+    // 3. 每隔2秒在控制台打印递增自然数
+    // let i = 0
+    // function method02(){
+    //     i++
+    //     console.log(i)
+    // }
+    // let timer2 = setInterval("method02()",2000)
+    // 4. 点击按钮取消打印自然数(普通函数注册)
+    function method03() {
+        clearInterval(timer2)
+    }
+
+
+</script>
+</html>

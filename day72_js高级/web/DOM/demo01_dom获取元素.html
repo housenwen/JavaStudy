@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>04-dom获取元素</title>
+
+</head>
+<body>
+<form action="#" method="get">
+    姓名 <input type="text" name="username" id="username" value="德玛西亚"/> <br/>
+    密码 <input type="password" name="password"> <br/>
+    生日 <input type="date" name="birthday"><br/>
+    性别
+    <input type="radio" name="gender" value="male" class="radio">男&emsp;
+    <input type="radio" name="gender" value="female" class="radio"/>女<br/>
+    爱好
+    <input type="checkbox" name="hobby" value="smoke">抽烟
+    <input type="checkbox" name="hobby" value="drink">喝酒
+    <input type="checkbox" name="hobby" value="perm">烫头<br/>
+    头像 <input type="file" name="pic"><br/>
+    学历
+    <select name="edu">
+        <option value="0">请选择</option>
+        <option value="1">入门</option>
+        <option value="2">精通</option>
+        <option value="3">放弃</option>
+
+    </select><br/>
+    简介
+    <textarea name="userIntro" cols="30" rows="10">默认值</textarea><br/>
+    <input type="reset" value="清空按钮"/>
+    <input type="submit" value="提交按钮"/><br/>
+
+</form>
+
+<script>
+    /*
+    * todo 第一种：es6之前获取方式
+        1）获取一个 (一个标签的id值是唯一的)
+            document.getElementById(id属性值) -> 推荐!!!
+        2）获取多个（了解）
+            document.getElementsByTagName(标签名)	根据标签名获取，返回数组对象
+            document.getElementsByClassName(class属性值)	根据class属性获取，返回数组对象
+            document.getElementsByName(name属性值)  根据name属性获取，返回数组对象
+            .
+           第二种：es6可根据CSS选择器获取
+        1）获取一个
+            document.querySelector(id选择器)
+        2）获取多个
+            document.querySelectorAll(css选择器) -> 推荐!!!
+                标签, class,属性,后代,并集,父子 ....
+    * */
+
+    // 1.获取id="username"的标签对象(dom: 称为元素)
+    let a1 = document.getElementById("username")
+    let a2 = document.querySelector("#username")
+    console.log(a1);
+    console.log(a2);
+
+    // 2.获取class="radio"的标签对象数组 (类选择器: class属性值可以重复)
+    // a3,a4是集合
+    let a3 = document.getElementsByClassName("radio")
+    let a4 = document.querySelectorAll(".radio")
+    console.log(a3);
+    console.log(a4);
+
+    // 3.获取所有的option标签对象数组(标签选择器)
+    let a5 = document.getElementsByTagName("option")
+    let a6 = document.querySelectorAll("option")
+    console.log(a5);
+    console.log(a6);
+
+    // 4.获取name="hobby"的input标签对象数组
+    let a7 = document.getElementsByName("hobby")
+    let a8 = document.querySelectorAll("input[name='hobby']")
+    console.log(a7);
+    console.log(a8);
+
+    // 5.获取文件上传选择框
+    let a9 = document.querySelectorAll("input[type='file']")
+    console.log(a9);
+</script>
+</body>
+</html>

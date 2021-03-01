@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>案例-商品全选</title>
+</head>
+<body>
+<!--
+todo 商品全选
+    1. 全选 点击全选按钮,所有复选框都被选中
+    2. 反选 点击反选按钮,所有复选框状态取反
+-->
+<button id="btn1">1. 全选</button>
+<button id="btn2">2. 反选</button>
+<button id="btn3">3. 全不选</button>
+<br/>
+<input type="checkbox">电脑
+<input type="checkbox">手机
+<input type="checkbox">汽车
+<input type="checkbox">别墅
+<input type="checkbox" checked="null">笔记本
+<script >
+
+    // todo 获取所有的商品复选框
+    let boxs = document.querySelectorAll('input[type="checkbox"]');
+    // todo  1. 全选
+    document.getElementById('btn1').onclick=function () {
+        for (let b of boxs) {
+            b.checked=true;
+        }
+    }
+    // todo 2. 反选
+    document.getElementById('btn2').onclick=function () {
+        for (let b of boxs) {
+            b.checked=!b.checked;
+        }
+    }
+    // todo  3. 全不选
+    document.getElementById('btn3').onclick=function () {
+        for (let b of boxs) {
+            b.checked=false;
+        }
+    }
+
+
+</script>
+</body>
+</html>

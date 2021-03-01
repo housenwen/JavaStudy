@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+<input type="text" id="username" value="张三"> <br>
+
+钓鱼 <input id="fish" type="checkbox" checked> <br>
+
+学籍：
+<select id="nation">
+    <option value="">--请选择--</option>
+    <option value="china" selected>中国</option>
+    <option value="russia">俄罗斯</option>
+    <option value="america">美国</option>
+</select>
+</body>
+<script>
+
+    /**
+     *  标签对象.属性名         获取标签的属性的值
+     *  标签对象.属性名=属性值   给标签的属性设置值
+     */
+
+        //需求1： 获取输入框的文本值
+    let usernameInput = document.getElementById("username");
+    console.log(usernameInput.value);
+    //需求2： 设置输入框的文本值为李四
+    usernameInput.value="李四";
+
+    //需求3：获取复选框的选中状态
+    let fishCheckBox = document.getElementById("fish");
+    console.log(fishCheckBox.checked);
+    //需求4：设置复选框的选中状态
+    fishCheckBox.checked=false;
+
+    //需求5：获取下拉列表选中的值
+    let nationSelect = document.getElementById("nation");
+    console.log(nationSelect.value);
+</script>
+</html>

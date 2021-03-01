@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>03-location对象</title>
+
+</head>
+<body>
+<!--
+todo location地址
+    1）获取当前窗口地址
+        location.href
+        (href是location的属性,代表地址栏中的url)
+        .
+    2）刷新当前页面
+        location.reload()
+        (reload是location的函数,代表重新加载此网址)
+    3）跳转页面（重点）
+        location.href='新页面地址'
+-->
+
+<button onclick="addr()">获取当前浏览器地址</button>
+<button onclick="refresh()">刷新当前页面</button>
+<button onclick="jump()"> 跳转页面(重点)</button>
+
+<script >
+    function addr() {
+        console.log(location.href)
+    }
+
+    function refresh() {
+        location.reload()
+    }
+
+    function jump() {
+        location.href = "http://www.baidu.com"
+    }
+
+</script>
+</body>
+</html>

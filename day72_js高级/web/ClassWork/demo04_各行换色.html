@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>案例-隔行变色</title>
+
+</head>
+<body>
+<table id="tab1" border="1" width="800" align="center">
+    <tr>
+        <th width="100px"><button id="btn1"><font size="3">全选</font><button id="btn2"><font size="3">反选</font></th>
+        <th>分类ID</th>
+        <th>分类名称</th>
+        <th>分类描述</th>
+        <th>操作</th>
+    </tr>
+    <tr>
+        <td><input type="checkbox" class="checkbox"></td>
+        <td>1</td>
+        <td>手机数码</td>
+        <td>手机数码类商品</td>
+        <td><a href="">修改</a>|<a href="">删除</a></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" class="checkbox"></td>
+        <td>2</td>
+        <td>电脑办公</td>
+        <td>电脑办公类商品</td>
+        <td><a href="">修改</a>|<a href="">删除</a></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" class="checkbox"></td>
+        <td>3</td>
+        <td>鞋靴箱包</td>
+        <td>鞋靴箱包类商品</td>
+        <td><a href="">修改</a>|<a href="">删除</a></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" class="checkbox"></td>
+        <td>4</td>
+        <td>家居饰品</td>
+        <td>家居饰品类商品</td>
+        <td><a href="">修改</a>|<a href="">删除</a></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" class="checkbox"></td>
+        <td>5</td>
+        <td>牛奶制品</td>
+        <td>牛奶制品类商品</td>
+        <td><a href="">修改</a>|<a href="">删除</a></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" class="checkbox"></td>
+        <td>6</td>
+        <td>大豆制品</td>
+        <td>大豆制品类商品</td>
+        <td><a href="">修改</a>|<a href="">删除</a></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" class="checkbox"></td>
+        <td>7</td>
+        <td>海参制品</td>
+        <td>海参制品类商品</td>
+        <td><a href="">修改</a>|<a href="">删除</a></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" class="checkbox"></td>
+        <td>8</td>
+        <td>羊绒制品</td>
+        <td>羊绒制品类商品</td>
+        <td><a href="">修改</a>|<a href="">删除</a></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" class="checkbox"></td>
+        <td>9</td>
+        <td>海洋产品</td>
+        <td>海洋产品类商品</td>
+        <td><a href="">修改</a>|<a href="">删除</a></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" class="checkbox"></td>
+        <td>10</td>
+        <td>奢侈用品</td>
+        <td>奢侈用品类商品</td>
+        <td><a href="">修改</a>|<a href="">删除</a></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" class="checkbox"></td>
+        <td>4</td>
+        <td>家居饰品</td>
+        <td>家居饰品类商品</td>
+        <td><a href="">修改</a>|<a href="">删除</a></td>
+    </tr>
+</table>
+<!--
+todo 隔行变色
+	1. 表格奇偶行颜色不同
+	2. 鼠标移入颜色高亮
+-->
+<script>
+    /**
+    *  隔行换色:
+    *       1. 找到所有的行
+    *       2. 遍历这些行,判断奇偶,设置背景色
+    *
+    *   触摸换色:
+    *       鼠标移上去高亮显示
+    *           a. onmouseover: 鼠标移上去
+    *           b. onmouseout: 鼠标移出去
+    *       1. 找到所有的行
+    *       2. 遍历这些行,给每一行设置触摸事件
+    *
+    * */
+    let trs = document.querySelectorAll("tr")
+
+    //todo 声明一个旧的颜色
+    let oldColor;
+    for(let i=1; i<trs.length;i++){
+        //隔行换色
+        if(i % 2 == 0){ //奇数行(索引0, 自己数1)
+            trs[i].style.backgroundColor = "pink"
+        }else{
+            trs[i].style.backgroundColor = "green"
+        }
+
+        //todo 鼠标悬浮点亮
+        trs[i].onmouseover = function () {
+            oldColor = this.style.backgroundColor;
+            //this代表触发当前事件的标签，即tr。
+            this.style.backgroundColor = "yellow"
+        }
+        //todo 鼠标移出去 意味着 鼠标之前肯定移上去
+        //todo onmouseout 在 onmouseover之后发生的
+        trs[i].onmouseout = function () {
+            this.style.backgroundColor = oldColor
+        }
+
+    }
+
+</script>
+<script>
+    // todo 获取所有的商品复选框
+    let boxs = document.querySelectorAll('input[type="checkbox"]');
+    // todo  1. 全选
+    document.getElementById('btn1').onclick=function () {
+        for (let b of boxs) {
+            b.checked=true;
+        }
+    }
+    // todo 2. 反选
+    document.getElementById('btn2').onclick=function () {
+        for (let b of boxs) {
+            b.checked=!b.checked;
+        }
+    }
+    // todo  3. 全不选
+    document.getElementById('btn3').onclick=function () {
+        for (let b of boxs) {
+            b.checked=false;
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>01-js三个弹框</title>
+
+</head>
+<body>
+<!--
+   todo  JS三个弹框 (属于window对象的)
+        0. window对象可以省略
+        1. alert(msg)
+            单纯的提示框(确定点击,弹框消失)
+        2. let result = confirm(msg)
+             确认框(确定和取消)
+             a. 点击确定,返回true
+             b. 点击取消,返回false
+        3. let result = prompt(msg,defaultValue)
+            提示框(文本输入框, 确定和取消)
+            a. 文本输入框,是用来输入提示信息的答案
+            b. 点击确定, 返回 文本框中输入的内容
+            c. 点击取消, 返回 null
+
+            js中,调用函数时参数个数可以不匹配
+            (defaultValue可写可不写,文本框默认值)
+-->
+<script >
+    // 弹出框实际上是由浏览器窗体
+    // window.alert("警告:今天可能有雨~~")
+    // alert("警告:今天可能有雨2~~")
+    //
+    // let result = confirm("你满18岁了吗?")
+    // document.write(result)
+
+    let result = prompt("你女朋友是谁?","默认值")
+    document.write(result)
+</script>
+</body>
+</html>
+

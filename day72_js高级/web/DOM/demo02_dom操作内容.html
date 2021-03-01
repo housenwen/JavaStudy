@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="mydiv1">
+    <a href="http://www.baidu.com">百度</a>
+</div>
+<div id="mydiv2">
+    <a href="http://www.baidu.com">百度</a>
+</div>
+</body>
+<script>
+
+    /**
+     * innerText:操作标签体的文本内容，不解析标签
+     *           标签体：开始标签到结束标签之间的内容
+     *
+     *  1.标签对象.innerText  获取标签体内容
+     *  2.标签对象.innerText=新文本  设置标签体的内容
+     */
+
+        //需求1：通过innerText属性分别获取和操作mydiv1之间的内容
+    let mydiv = document.getElementById("mydiv1");
+    //获取标签体内容
+    console.log(mydiv.innerText);
+    //重新设置标签体内容
+    mydiv.innerText="<a href='http://www.taobao.com'>淘宝</a>";
+
+
+    /**
+     * innerHTML:和innerText属性一样，但是能够识别标签。
+     */
+
+
+        //需求1：通过innerHTML属性分别获取和操作mydiv2之间的内容
+    let mydiv2 = document.getElementById("mydiv2");
+    //获取标签体内容
+    console.log(mydiv2.innerHTML);
+    //重新设置标签体内容
+    mydiv2.innerHTML="<a href='http://www.taobao.com'>淘宝</a>";
+
+</script>
+</html>

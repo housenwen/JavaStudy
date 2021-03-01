@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>02-js二个定时器</title>
+
+</head>
+<body>
+<!--
+    JS两个定时器(属于window对象,书写时可省略)
+        1. setInterval(函数调用,时间间隔)
+            每隔多少时间,调用一次函数(无限循环)
+
+        2. setTimeout(函数调用,时间间隔)
+            隔多少时间,调用一次函数(只有一次)
+
+     取消计时器
+        0. 不论setInterval/setTimeout在调用时,会返回计时器对象自身
+             eg. let timer = setInterval(...)
+        1. clearInterval(计时器对象)
+        2. clearTimeout(计时器对象)
+-->
+<!--
+    input标签(type=button)是单标签, button标签是双标签,其他几乎一样
+-->
+<input type="button" id="btn1" value="取消打印时间">
+<button id="btn2" onclick="method03()">取消打印自然数</button>
+
+<script>
+    // 1. 定时5秒之后在控制台打印当前时间(只有一次)
+    function method01(){
+        console.log(new Date().toLocaleString())
+    }
+    let timer1 = setTimeout("method01()",3000)
+    // 2. 点击按钮取消打印时间(匿名函数注册)
+    // let btn1 = document.getElementById("btn1")
+    document.getElementById("btn1").onclick = function(){
+        clearTimeout(timer1)
+    }
+
+    // 3. 每隔2秒在控制台打印递增自然数
+    let i = 0
+    function method02(){
+        i++
+        console.log(i)
+    }
+    let timer2 = setInterval("method02()",2000)
+    // 4. 点击按钮取消打印自然数(普通函数注册)
+    function method03() {
+        clearInterval(timer2)
+    }
+
+</script>
+</body>
+</html>l>
