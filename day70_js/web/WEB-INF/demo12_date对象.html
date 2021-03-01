@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>12-日期</title>
+</head>
+<body>
+<!--
+   todo 日期  Date
+        1. 创建对象
+             let date = new Date(); 获取当前时间时间
+             .
+        2. 常用方法
+            toLocaleString()      转换为本地日期格式的字符串
+            getFullYear() 获取日期中的year
+            getMonth()   获取日期中的month
+            getDate()    获取日期中的 号
+            getTime()   获取时间毫秒值(时间原点: 1970年1月1号0时分秒)
+-->
+
+<script>
+    let date = new Date();
+    //Sun May 24 2020 14:38:34 GMT+0800 (中国标准时间:东八区)
+    console.log(date);
+    console.log(date.toLocaleString()); // 转换为本地日期格式的字符串
+    console.log(date.getFullYear()); // 年 四位
+    console.log(date.getMonth()+1);// 月 范围：0~11
+    console.log(date.getDate()); // 日
+    console.log(date.getTime()); // 1970年~今毫秒值
+</script>
+
+</body>
+</html>

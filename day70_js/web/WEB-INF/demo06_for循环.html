@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>03-循环语句</title>
+
+</head>
+<body>
+
+<script>
+    /**
+    * 1. 普通for循环
+		for(let i= 0; i<10; i++){
+    		需要执行的代码;
+		}
+
+    2. 增强for循环(for of)
+            for(let obj of array){
+                需要执行的代码;
+            }
+
+    3. 索引for循环(for in) -> 了解
+            for(let index in array){
+                需要执行的代码;
+            }
+    * */
+    /**
+    *   java 数组:
+    *       String[] array = {"张三","李四","王五"}
+    *   js 数组:
+    *       let array = ['张三','李四','王五']
+    *
+    * */
+    let array = ['张三','李四','王五']
+    for(let i= 0; i<array.length; i++){
+        console.log(array[i])
+    }
+    for(let element of array){
+        console.log(element); // 数组中的每个元素
+    }
+
+    for(let index in array){
+        console.log(index); // 数组中的每个元素索引
+    }
+
+</script>
+</body>
+</html>

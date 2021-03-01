@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>01-HTML引入JS</title>
+
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<!--
+    js 需要引入到html中, 浏览器加载的时候会自动解释运行
+
+    #js引入到html中的两种方式
+        1. 内部引入
+            a. 在html中写一个script标签 (type="text/javascript" 可以省略)
+            b. 然后在script标签内编写js代码
+            c. script标签可以放在html中任意位置(推荐放在body内底部)
+
+        2. 外部引入
+            a.在html外部编写一个js文件
+            b. 然后通过script标签的src属性引入
+
+      注意: 一个script标签只能使用一种引入方式
+
+
+-->
+<script type="text/javascript">
+    alert("hello world");
+</script>
+
+<script src="js/my.js">
+    /*这样写没效果*/
+    /*alert("2333333~") */
+</script>
+</body>
+</html>

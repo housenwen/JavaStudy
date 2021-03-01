@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title10</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>09-基本表格</title>
+</head>
+<body>
+<!--
+    嵌套标签:
+        1. table 表格标签
+        2. tr 标签  table row  行
+        3. td 标签  table data 数据
+
+      描述:   一个表格,有几行,每行有几个数据(单元格)
+
+  todo 属性:
+        1. table标签属性
+            a. border : 边框
+            b. cellspacing : 单元格之间的距离
+            c. cellpadding: 边框和内容之间的距离
+            d. width: 宽度
+            e. align : 排列(left right center)  整个表格居中
+            f. bgcolor : 背景色  background
+            补充: 如果多个属性之间存在冲突情况,浏览器是有优先级
+            (规律: 先左后右,先上后下, 网页坐标原点: 左上角)
+
+        2. tr 标签属性
+            a. align  对整行的内容起作用
+            b. bgcolor
+
+        3. td 标签属性
+            a. align 对当前 单元格内容起作用
+            b. bgcolor
+            c. height 高度 (设置一个单元格,整行都生效)
+-->
+<table border="1px" cellspacing="0px" cellpadding="10px" width="500px" align="center" >
+    <tr align="center" >
+        <td>姓名</td>
+        <td>年龄</td>
+        <td>身高</td>
+        <td>体重</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#ffc0cb" height="50px">1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+    </tr>
+</table>
+
+</body>
+</html>
+</body>
+</html>

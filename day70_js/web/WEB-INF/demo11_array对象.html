@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>11-数组</title>
+
+</head>
+<body>
+<!--
+
+todo 数组
+    查询手册完成:
+       1. 创建数组
+           a.  let array = new Array('a','b','c')
+           b.  let array = ['a','b','c']  -> 中括号 (常用)
+           .
+           js的数组更像java中的集合,长度可以变化的,元素类型不必一致
+           .
+       2. 数组常用方法
+            concat() 连接两个或更多的数组，并返回结果。
+            push() 向数组的末尾添加一个或更多元素，并返回新的长度。
+            pop() 删除并返回数组的最后一个元素
+            join() 把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔。
+                与 字符串.split()切割为数组 方法相反
+            sort() 对数组的元素进行排序
+-->
+<script>
+    let array1 = new Array('a','b','c')
+    let array2 = ['d','e','f']
+
+    console.log(array1);
+    console.log(array2);
+
+    for (let i = 0; i < array1.length; i++) {
+        console.log(array1[i]);
+    }
+
+    // 常用方法
+    //concat: 两个数组拼接, 产生新数组
+    let array3 = array1.concat(array2)
+    console.log(array3);
+
+    console.log(array1.length)
+    //往数组添加一个元素
+    array1.push(100)
+    console.log(array1.length)
+    console.log(array1)
+    //删除并返回最后一个元素
+    let s = array1.pop();
+    console.log(array1)
+    console.log(s)
+    //将数组转成字符串,元素之间用参数中的内容隔开(string的split方法相反)
+    let str = array1.join(",");
+    console.log(str);
+
+    let arr = str.split(",")
+    console.log(arr);
+
+    let arr2 = [4, 3, 1, 2]
+    console.log(arr2.sort()) // 默认升序
+    console.log(arr2.sort().reverse()) // 降序
+
+    var f = function(o1,o2){
+        // return o1-o2; // 升序
+        return o2-o1; // 降序
+    }
+    let arr3 = arr2.sort(f) // 传参: 参数还是函数类型的变量
+    console.log(arr3);
+
+    //匿名函数
+    console.log(arr2.sort(function (a,b) {
+        return a-b;
+    }))
+
+</script>
+</body>
+</html>

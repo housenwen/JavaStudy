@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>09-盒子模型</title>
+
+    <style>
+        /*
+          todo  盒子模型: 在html中,每个标签都可以看成一个盒子
+                0. 准备: 在google浏览器中快捷键F12 (开发者工具)
+                    选中elements标签
+                    .
+                1. 盒子5要素:
+                    border : 边框
+                    width + height : 宽高(内容)
+                    padding : 内间距(边框到内容的距离)
+                    margin : 外间距(边框到另一个标签的距离)
+                    .
+                2.  两种盒子类型
+                    1. 标准盒子: box-sizing: content-box; (默认)
+                        width=content的宽度
+                    2. 怪异盒子: box-sizing: border-box;
+                        width=盒子的宽度=border+padding+content宽度
+
+
+
+        */
+        div{
+            border: 1px solid green;
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+            margin: 50px 60px;
+            box-sizing: content-box;
+        }
+    </style>
+</head>
+<body>
+<div>
+    内容
+</div>
+
+</body>
+</html>

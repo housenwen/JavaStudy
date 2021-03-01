@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+
+    /**
+     *  parseInt():解析字符串，返回一个整数
+     *
+     */
+    let str = '100.12px'
+    let number = parseInt(str);
+    console.log(number);
+
+    /**
+     *  encodeURI() 把字符串编码为 URI。
+     *          杯子 -> %E6%9D%AF%E5%AD%90
+     *  decodeURI() 解码某个编码的 URI 。
+     *           %E6%9D%AF%E5%AD%90 ->  杯子
+     *
+     */
+    let str3 = '杯子'
+    var result = encodeURI(str3); //编码
+    console.log(result);
+
+    console.log(decodeURI(result)) //解码
+</script>
+</html>

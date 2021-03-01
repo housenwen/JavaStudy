@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>10-字符串</title>
+
+</head>
+<body>
+<!--
+
+todo 1. 构造字符串对象可以使用
+    a. 双引号
+    b. 单引号
+    c. 反引号(重音符) 键盘左上角 esc下面 (es6字符串模板)
+        经常用在拼接字符串: 避免单双引手动拼接
+            '字符串${变量名}字符串'
+            .
+ 2. 字符串常用方法
+      substring(startIndex,endIndex) 提取字符串中两个指定的索引号之间的字符。  包头不包尾
+      toLowerCase() 把字符串转换为小写。
+      toUpperCase() 把字符串转换为大写。
+      split() 把字符串分割为字符串数组。
+      trim() 去掉首尾空格
+
+-->
+<script type="text/javascript">
+    // ------------ 1. 构造字符串对象可以使用  双引号,单引号,反引号
+    // let str2 = new String("abc")
+    let str = "abc"
+    let str2 = 'abc'
+    let str3 = `abc`
+    console.log(str);
+    console.log(str2);
+    console.log(str3);
+
+    let i = 100; // 效果: 小丽体重i斤
+    let str4 = '小丽体重' + i + '斤'
+    console.log(str4);
+
+    let str5 = `小张体重${i}斤`
+    console.log(str5);
+    // ------------ 2. 字符串常用方法
+
+    let str6 = "askfdjASDFAJSDLas"
+    var s = str6.toLowerCase();
+    console.log(s)
+</script>
+</body>
+</html>

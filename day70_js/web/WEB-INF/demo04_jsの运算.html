@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+
+    /**
+        注意：
+        1.js中的==只比较值的大小，不比较数据类型
+
+     */
+
+    let abc = "123";
+    let num = 123;
+    console.log(abc==num);
+
+
+    /**
+     *  2js中任意的非null，非undefined,非零可以理解成true
+     */
+    if(abc){
+        console.log("条件为真");
+    }
+    alert(abc)
+
+
+    /**
+     * 3.js中任意数值都可以参与逻辑运算
+     左边为真，值看右边。
+     左边为假，值看左边。
+     */
+    console.log(abc&&num);
+    console.log(0&&num);
+    // alert(console.log(0&&num))
+    // alert(console.log(abc&&num))
+
+
+</script>
+</html>

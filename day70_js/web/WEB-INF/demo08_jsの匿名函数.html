@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>05-匿名函数</title>
+
+</head>
+<body>
+<script>
+    /*
+    * js中的函数格式有两种
+    *   1. 普通函数
+    *       function 函数名(参数列表){
+    *           函数体
+    *       }
+    *   2. 匿名函数
+    *      变量 = function(参数列表){
+    *           函数体
+    *      }
+    *
+    *      a. 匿名函数没有函数名
+    *      b. 匿名函数必须给变量赋值
+    *
+    *    补充:
+    *       1. 在js,函数是一种特殊的变量类型(对象)!!!
+    *       2. 匿名函数一般是用来注册事件
+    * */
+    function method01(a,b) {
+        document.write(a + b + "哈哈")
+    }
+    method01(1,2)
+    document.write("<br>")
+
+    let method02 = function (a,b) {
+        document.write(a + b + "呵呵")
+    }
+    method02(1,5)
+    document.write("<br>")
+    document.write(typeof method02)
+    document.write("<br>")
+</script>
+</body>
+</html>

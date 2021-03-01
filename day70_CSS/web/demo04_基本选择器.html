@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>04-基本选择器</title>
+    <style>
+        /*
+
+
+        todo    #三大基本选择器
+                1. id选择器
+                    a. 每个标签都有id属性(属性值当前html唯一)
+                    b. 语法: #id值
+                        #myid : 定位id=myid 的标签
+                        .
+                2. class选择器
+                    a. 每个标签都有class属性(class属性允许重复)
+                    b. 语法:  .class值
+                        .myclass : 定位class=myclass的一组标签
+                                                           .
+                3. 标签选择器
+                    a. 语法: 标签名
+                    b. 选中标签名为xxx的一组标签
+
+
+        */
+        #myid{
+            color : red;
+        }
+        .yourclass{
+            font-size: 30px;
+            color : pink;
+        }
+        .myclass{
+            color : #00ff00;
+        }
+
+        span{
+            color : blue;
+        }
+    </style>
+
+</head>
+<body>
+<span id="myid" class="myclass">span1</span> <br>
+<span class="myclass yourclass">span2</span> <br>
+<span class="myclass">span3</span> <br>
+<span>span4</span> <br>
+<span>span5</span> <br>
+<span>span6</span> <br>
+
+</body>
+</html>

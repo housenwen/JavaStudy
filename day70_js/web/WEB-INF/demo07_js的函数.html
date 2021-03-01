@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    /*
+
+            function 函数名(参数列表){
+                函数体;
+                [return 返回值;] // 中括号意思表示内容可以省略....
+            }
+
+
+           注意：
+            1.函数必须要被调用才能执行。
+            2.js中函数如果需要返回值，直接return即可。
+            3.js中的函数需要传递参数，直接写变量名即可。
+            4.js中不存在函数的重载。只要函数名一致，后面的会覆盖前面的。
+            5.js中函数的调用只要名字一致即可。在js中，有个隐藏对象，arguments存在了函数的所有参数
+
+     */
+    function demo() {
+        console.log("success");
+    }
+
+    demo();
+
+    function  demo2() {
+        return 123;
+    }
+
+    let num = demo2();
+    console.log(num);
+
+
+    function demo3(a,b) {
+        console.log(a+b);
+    }
+
+    demo3(1,2);
+    function demo3() {
+        console.log("这是demo3");
+    }
+
+    demo3(1,2);
+
+
+    function demo5() {
+        for(let param of arguments){
+            console.log(param);
+        }
+    }
+    demo5(1,2,3,"a");
+</script>
+</html>

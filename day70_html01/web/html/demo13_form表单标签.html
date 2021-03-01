@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title13</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+  todo  form:声明一个表单
+        method: 提交方式
+            get(默认)
+                特点:
+                    1.提交的数据会显示在地址栏上
+                    2.get提交数据的格式    url?key=value&key=value
+                    3.get提交的数据有长度的限制
+            post
+                特点:
+                    1.提交的数据不会显示在浏览器地址栏
+                    2.提交的数据没有长度的限制,所以文件上传必须使用post
+       action: 数据提交的服务器地址
+
+
+
+
+
+ todo  form表单提交数据的细节:
+    1.所有需要提交数据的标签必须要有name属性,要不然浏览器不会提交数据
+        name的作用就是用来标识提交的数据的含义
+        提交的数据的格式
+          key  value
+          key: 就是标签的name属性值,
+          value: 就是提交的值
+    2. 如果用户选择的标签,radio,check,select,我们必须加上value属性,
+        value属性的值就是用户提交给服务器的值
+-->
+<form method="post" action="http://www.taobao.com">
+    <table>
+        <tr>
+            <td>用户名:</td>
+            <td><input name="username" type="text"></td>
+        </tr>
+        <tr>
+            <td>密码:</td>
+            <td><input name="password" type="password"></td>
+        </tr>
+        <tr>
+            <td>性别:</td>
+            <td>
+                <input type="radio" checked name="sex" value="male"> 男  <input value="female" name="sex" type="radio">女
+            </td>
+        </tr>
+        <tr>
+            <td>爱好:</td>
+            <td>
+                <input name="hobby" value="eat" type="checkbox"> 吃饭
+                <input name="hobby" value="sleep" checked type="checkbox"> 睡觉
+                <input name="hobby" value="ddd" type="checkbox"> 打豆豆
+            </td>
+        </tr>
+        <tr>
+            <td>学历:</td>
+            <td>
+                <select name="education">
+                    <option value="primary school">小学</option>
+                    <option value="middle school">初中</option>
+                    <option value="high school" selected>高中</option>
+                    <option value="university">大学</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>照片:</td>
+            <td><input type="file"></td>
+        </tr>
+        <tr>
+            <td>出生年月:</td>
+            <td><input name="birthday" type="date"></td>
+        </tr>
+        <tr>
+            <td>自我介绍:</td>
+            <td>
+                <textarea rows="5" cols="30"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="reset">
+                <input type="button" value="按钮" onclick="alert('再来一次')">
+                <input type="submit" value="注册">
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #menu {
+            width: 100%;
+            text-align: center;
+            background-color: #ffc900;
+            height: 40px;
+            margin-top: 50px;
+        }
+
+        #menu ul{
+            line-height: 40px;
+        }
+
+        #menu ul li {
+            float: left;
+            margin-left: 50px;
+            font-size: 18px;
+            font-family: 宋体;
+            list-style-type: none;
+
+        }
+
+
+        #content {
+            height: 500px;
+            background-image: url("../img/bg.png");
+            background-size: 100% 500px;
+            padding-top: 25px;
+            box-sizing: border-box;
+        }
+
+
+        #content_register {
+            height: 450px;
+            width: 900px;
+            margin: auto auto;
+            background-color:white;
+            border: 10px solid gray;
+        }
+
+        #register_left {
+            float: left;
+            width: 250px;
+            height: 450px;
+            padding-left: 20px;
+            box-sizing: border-box;
+        }
+
+        #register_center {
+            float: left;
+            width: 400px;
+            height: 450px;
+
+
+        }
+
+        table{
+            margin-top: 50px;
+            width: 100%;
+
+        }
+        /*左侧单元格*/
+        .td_left{
+            width: 65px;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        /*右侧单元格*/
+        .td_right{
+            text-align: left;
+            width: 293px;
+        }
+
+        /*普通文本框和密码框*/
+        input[type="text"],input[type="password"] {
+            width: 220px;
+            height: 20px;
+            line-height: 20px;
+            margin: 15px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: 1px solid #a6a6a6;
+        }
+        /*验证码*/
+        input[name="smsCode"]{
+            width: 100px;
+        }
+        /*提交按钮*/
+        input[type="submit"]{
+            width: 100px;
+            height: 36px;
+            line-height: 36px;
+            background-color: #ffc900;
+            font-size: 20px;
+            border: #ffc900 solid 1px;
+        }
+
+        #register_right {
+            float: left;
+            width: 250px;
+            text-align: right;
+        }
+
+
+
+        #footer {
+            margin-top: 30px;
+            background-color: #ffc900;
+            height: 50px;
+            text-align: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 头部菜单 -->
+<div id="menu">
+    <ul>
+        <li>首页</li>
+        <li>周边游</li>
+        <li>山水游</li>
+        <li>古镇游</li>
+        <li>出境游</li>
+        <li>国内游</li>
+        <li>港澳游</li>
+        <li>台湾游</li>
+        <li>5A景点游</li>
+        <li>全球自由行</li>
+    </ul>
+</div>
+
+<!-- 中间内容 -->
+<div id="content">
+
+    <div id="content_register">
+        <!-- 注册左边-->
+        <div id="register_left">
+            <p style="color: #ffc900;font-size: 20px">用户注册</p>
+            <p style="color: gainsboro;font-size: 20px">USER REGISTER</p>
+        </div>
+        <!-- 中间-->
+        <div id="register_center">
+            <table width="100%">
+                <tr>
+                    <td class="td_left">
+                        用户名
+                    </td>
+                    <td class="td_right">
+                        <!-- placeholder 是提示信息-->
+                        <input type="text" placeholder="请输入账号">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_left">
+                        手机号
+                    </td>
+                    <td class="td_right">
+                        <input type="text" placeholder="请输入的手机号">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_left">
+                        密码
+                    </td>
+                    <td class="td_right">
+                        <input type="password" placeholder="请输入密码">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_left">
+                        验证码
+                    </td>
+                    <td class="td_right">
+                        <!--
+                            实际上有多个选择器,
+                            name="smsCode" 的width覆盖了type="text"的width
+                        -->
+                        <input type="text" name="smsCode" placeholder="请输入验证码">
+                        <a href="#">发送手机验证码</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center">
+                        <input type="submit">
+                    </td>
+                </tr>
+            </table>
+            </form>
+        </div>
+        <!-- 右边-->
+        <div id="register_right">
+            <p>已有账号
+                <a style="color: pink;text-decoration: none"
+                   href="http://www.baidu.com">立即登录</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- 底部信息 -->
+<div id="footer">
+    江苏传智播客教育科技股份有限公司 版权所有Copyright 2006-2020, All Rights Reserved 苏ICP备16007882
+</div>
+</body>
+</html>
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+    this代表的是触发当前事件的标签对象，此处就指代按钮。
+-->
+<input type="button"  value="按钮" onclick="demo1()" onmouseover="demo4(this)" onmouseout="demo5(this)"><br>
+<input type="text" onblur="demo2()"><br>
+<select onchange="demo3()">
+    <option>中国</option>
+    <option>俄罗斯</option>
+    <option>美国</option>
+</select>
+<br>
+<input id="btn" type="button" value="按钮2">
+</body>
+<script>
+
+    /**
+     *  		 onclick
+     onblur
+     onchange  : 一般作用于下拉列表
+     onsubmit
+     onmouseover
+     onmouseout
+     onload
+
+     事件绑定函数的语法：
+
+     第一种：
+     <标签名  事件名="函数名">
+
+
+     第二种方式：(开发常用)
+
+     标签对象.事件名=匿名函数
+
+     *
+     */
+
+    function demo1() {
+        alert("按钮被点击了");
+    }
+
+    function demo2() {
+        alert("输入框失去焦点了，我要验证码输入框的内容的格式是否正确");
+    }
+
+    function demo3() {
+        alert("下拉列表的内容改变了");
+    }
+
+    function demo4(myinput) {
+        //修改按钮的背景色
+        myinput.style.backgroundColor="blue";
+    }
+    function demo5(myinput) {
+        myinput.style.backgroundColor="green";
+    }
+
+    //通过标签的id的属性值获取标签对象
+    let btn = document.getElementById("btn");
+    btn.onclick = function () {
+        alert("第二种绑定事件的方式");
+    }
+</script>
+</html>

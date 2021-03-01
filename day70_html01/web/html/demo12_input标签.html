@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title12</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+   todo input:
+            type="text"      文本框,用户输入可见内容
+            type="password"  密码框,用户输入不可见内容
+            type="radio"     单选按钮,通过name属性分组,然后才能实现单选
+            type="checkbox"  多选框,用户可以选择多个
+                        checked属性,可以设置单选框和多选框的默认选中状态
+            type="file"    文件上传
+            type="date"     出生年月
+            type="reset"    重置按钮
+            type="button"   这仅仅是一个按钮
+            type="submit"   提交表单
+
+  todo <select>  下拉列表
+        <option> 标签声明下拉列表的列表项
+           selected可以设置默认选中的下拉选项
+
+   todo <textarea> 文本域,输入一段内容
+
+-->
+<form >
+    <table>
+        <tr>
+            <td>用户名:</td>
+            <td><input  type="text"></td>
+        </tr>
+        <tr>
+            <td>密码:</td>
+            <td><input  type="password"></td>
+        </tr>
+        <tr>
+            <td>性别:</td>
+            <td>
+                <input type="radio" checked name="sex" value="male"> 男  <input value="female" name="sex" type="radio">女
+            </td>
+        </tr>
+        <tr>
+            <td>爱好:</td>
+            <td>
+                <input  value="eat" type="checkbox"> 吃饭
+                <input  value="sleep" checked type="checkbox"> 睡觉
+                <input  value="ddd" type="checkbox"> 打豆豆
+            </td>
+        </tr>
+        <tr>
+            <td>学历:</td>
+            <td>
+                <select >
+                    <option value="primary school">小学</option>
+                    <option value="middle school">初中</option>
+                    <option value="high school" selected>高中</option>
+                    <option value="university">大学</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>照片:</td>
+            <td><input type="file"></td>
+        </tr>
+        <tr>
+            <td>出生年月:</td>
+            <td><input  type="date"></td>
+        </tr>
+        <tr>
+            <td>自我介绍:</td>
+            <td>
+                <textarea rows="5" cols="30"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="reset">
+                <input type="button" value="按钮" onclick="alert('再来一次')">
+                <input type="submit" value="注册">
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>
+</body>
+</html>

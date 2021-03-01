@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    /**
+     第一种：
+     let reg = new RegExp("正则表达式"); 此处正则需要\\
+
+     第二种：
+     let reg = /正则表达式/;
+
+     api
+     正则对象.test(str);校验字符串是否满足正则表达式
+
+     注意：js中的正则表达式必须加上^  $  .表示匹配整个字符串。否则表示的是  是否含有
+
+     */
+
+
+    let username = "admin22";
+
+    //用户名必须在6到8位（数字，字母，下滑线）之间
+    //let regExp = new RegExp("^\\w{6,8}$");   此种方式中，需要\\
+
+    let regExp = /^\w{6,8}$/;
+
+    console.log(regExp.test(username));
+</script>
+</html>

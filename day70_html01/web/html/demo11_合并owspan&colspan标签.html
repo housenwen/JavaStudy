@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title11</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>10-表格合并</title>
+</head>
+<body>
+<!--
+跨行 和 跨列(td标签的属性)
+a. rowspan :  跨行
+b. colspan :   跨列(column)
+
+  一个4行4列的表格
+    需求1:
+        第一行第一列
+      和 第二行第一列 的单元格进行合并?
+
+    思路:
+        1. 首先完成4行4列的表格 table>tr*4>td*4 最后tab
+        2. 判断跨行还是跨列(从左至右,从上至下)
+            a. 让一个单元格占多个位置(膨胀)
+            b. 同行跨列, 同列跨行
+        3. 删除多余单元格
+-->
+<table border="1px" cellspacing="0px" cellpadding="10px" align="center" width="500px">
+    <tr align="center">
+        <td rowspan="2">11</td>
+        <td>12</td>
+        <td colspan="2">13</td>
+    </tr>
+    <tr>
+        <td>22</td>
+        <td>23</td>
+        <td>24</td>
+    </tr>
+    <tr>
+        <td>31</td>
+        <td>32</td>
+        <td>33</td>
+        <td>34</td>
+    </tr>
+    <tr>
+        <td>41</td>
+        <td>42</td>
+        <td>43</td>
+        <td>44</td>
+    </tr>
+</table>
+
+
+</body>
+</html>
+</body>
+</html>

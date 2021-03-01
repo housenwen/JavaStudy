@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05扩展选择器</title>
+    <style>
+
+
+        /*
+          todo  扩展选择器： 这是基本选择器的组合
+
+         todo    1.并集选择器 ： 解决了多个选择器样式一致时的代码冗余
+                选择器1，选择器2  {
+                    css样式
+                }
+                .
+             2. 后代选择器 : 选择器1下面的所有满足选择器2的子标签。
+                选择器1  选择器2 {
+                    css样式
+                }
+                .
+             3. 父子选择器 : 选择器1下面的所有满足选择器2的儿子辈标签
+                选择器1>选择器2 {
+                    css样式
+                }
+                .
+             4.属性选择器 : 针对满足选择器的标签再次进行属性条件的过滤
+                选择器[属性名=属性值][...]
+
+
+         */
+
+        /**
+            需求1：所有div和所有的span同样的样式
+         */
+        /* div,span {
+             color: red;
+         }
+ */
+
+        /*
+          需求2：  所有div内部(儿子辈和孙子辈)的span标签
+         */
+        /*div span {
+            color: red;
+        }*/
+
+
+        /*
+         需求3：  所有div内部(儿子辈)的span标签
+        */
+        div>span {
+            color: red;
+        }
+
+
+        /*
+            所有的输入框边框是红色
+         */
+        input[type="text"] {
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <p>
+        <span>我是span4</span>
+    </p>
+    我是div1
+    <span>
+            我是span3
+        </span>
+</div>
+<div>
+    我是div2
+</div>
+<span>
+        我是span1
+    </span>
+<span>
+        我是span2
+    </span>
+<br>
+<input type="text">
+<input type="text">
+<input type="text">
+<input type="button" value="按钮">
+<input type="submit">
+<input type="password">
+</body>
+</html>

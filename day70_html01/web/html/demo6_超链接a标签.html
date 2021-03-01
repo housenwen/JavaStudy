@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title6</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>04-超链接</title>
+</head>
+<body>
+<!--
+    a标签: anchor 锚 (超链接标签)
+
+       1.作为超链接标签
+            href: 访问资源的地址
+
+                a.当前项目内资源，直接相对路径访问即可
+                b.网络资源，必须加上http协议，http://www.baidu.com
+
+            target: 打开资源的方式
+                _self: 当前窗口打开资源
+                _blank:新开一个窗口打开资源
+
+
+       2.作为锚点（类似书签的作用）
+            第一步：<a name=锚点名> 来定义锚点
+            第二步： <a href="#锚点名"> 设置点击跳转
+
+
+      3.扩展：当成按钮来使用
+， 			<a href="javascript:void(0)" onclick='alert('弹框')'>点我</a>
+        href="javascript:void(0)" 固定写法，
+        onclick=事件，js时会讲
+-->
+<a name="top">
+    页面最上方
+</a> <br>
+<!-- 1.超链接 -->
+<a href="http://www.baidu.com">百度一下,你就知道</a> <br>
+
+<a href="./01_basic.html" target="_self">访问01页面</a> <br>
+<a href="./01_basic.html" target="_blank">访问01页面</a> <br>
+
+<!-- 3.按钮 -->
+<a href="javascript:void(0)" onclick='alert('弹框')'>点我</a>
+
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+
+<!-- 2.锚点 -->
+<a href="#top">回到最上方</a>
+
+
+</body>
+</html>
+</body>
+</html>
