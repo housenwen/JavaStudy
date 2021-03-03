@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd"
+           version="3.1">
+
+    <servlet>
+        <!-- 给字节码文件的路径取个别名，随便叫什么，一般和类名相同-->
+        <servlet-name>DemoServlet</servlet-name>
+        <!-- servlet的字节码文件路径-->
+        <servlet-class>com.servlet.DemoServlet</servlet-class>
+
+        <load-on-startup>2</load-on-startup>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+
+    </servlet>
+
+
+
+
+    <!-- 配置servlet和这个servlet要处理的url的一一对应的关系-->
+    <servlet-mapping>
+        <servlet-name>DemoServlet</servlet-name>
+        <!-- servlet的访问虚拟路径 -->
+        <url-pattern>/abc</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DemoServlet2</servlet-name>
+        <servlet-class>com.servlet.DemoServlet2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DemoServlet2</servlet-name>
+        <url-pattern>/1234</url-pattern>
+    </servlet-mapping>
+</web-app>
