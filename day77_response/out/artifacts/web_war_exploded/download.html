@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>直接下载资源</h1>
+<!--
+    直接访问资源的方式下载的缺点：
+        1.有的资源会以附件的形式下载，有的资源浏览器直接解析了。
+           浏览器软件的默认行为：浏览器尝试解析文件，如果能解析，就解析，如果不能解析，才会以附件下载。
+        2.无法进行权限的控制。
+-->
+<a href="download/timg.jpg">美女</a>
+<a href="download/timg.zip">压缩包</a>
+
+<br>
+<h1>自定义servlet下载资源</h1>
+<!--
+    请求行：  请求的方式  请求的地址  请求的协议
+    请求头：  http协议规范的固定的请求
+    请求体：  请求的参数
+-->
+<a href="downloadServlet?filename=timg.jpg">美女</a>
+<a href="downloadServlet?filename=timg.zip">压缩包</a>
+</body>
+</html>
