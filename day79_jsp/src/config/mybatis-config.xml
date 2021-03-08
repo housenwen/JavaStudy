@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--引入外部的配置文件-->
+    <properties resource="jdbc.properties"/>
+    
+    <!--settings标签 设置mybatis的运行行为-->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--关闭积极加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+
+    <!--别名标签 扫包-->
+    <typeAliases>
+        <package name="com.pojo"/>
+    </typeAliases>
+    
+    <environments default="test">
+        <environment id="test">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.user}"/>
+                <property name="password" value="${jdbc.pwd}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+       <package name="com.mapper"/>
+    </mappers>
+</configuration>
