@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd"
+           version="3.1">
+<filter>
+    <filter-name>MyFilter</filter-name>
+    <filter-class>com.itheima.filter.MyFilter</filter-class>
+</filter>
+    <filter-mapping>
+        <filter-name>MyFilter</filter-name>
+        <!--
+       url-pattern来说有4中配法：  /*  *.action   /   /demoServlet
+
+       过滤器 因为要拦截过个请求，所以可以配置 /*  或者  扩展名 *.action
+
+
+       需求：
+           针对所有用户相关的进行进行拦截   /user/*
+           /user/login
+           /user/register
+           /user/updateUser
+
+
+           针对所有向servlet发起的请求进行拦截。
+
+           所有servlet资源加上.do扩展名   *.do
+           /user/login.do
+           /user/register.do
+
+   -->
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <listener>
+        <listener-class>com.itheima.listener.MyServletContextListener</listener-class>
+    </listener>
+</web-app>
