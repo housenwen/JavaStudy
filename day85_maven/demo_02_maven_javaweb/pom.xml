@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <!-- pom.xml的版本   -->
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- 当前工程的坐标，安装到本地仓库，就是按照此处的groupId+artifactId+version安装 -->
+  <!-- 组织机构名，一般是公司域名的倒写 -->
+  <groupId>com.itheima</groupId>
+  <!-- 项目名 -->
+  <artifactId>demo_02_maven_javaweb</artifactId>
+  <!-- 版本号 -->
+  <version>1.0-SNAPSHOT</version>
+
+  <!--
+      声明项目的打包方式：
+        web工程必须打war包
+        不写默认打 jar包
+        父工程必须打pom包
+  -->
+  <packaging>war</packaging>
+
+  <!-- 声成描述文档时的项目名 -->
+  <name>demo_02_maven_javaweb Maven Webapp</name>
+  <!-- 项目的主页地址 -->
+  <url>http://www.example.com</url>
+
+  <!-- 属性 -->
+  <properties>
+    <!-- 声明当前工程的编码方式：utf-8 -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- 工程的编译环境 -->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+
+    <!--
+      依赖版本的统一管理
+          1.在properties通过<依赖名称.version>来声明依赖的版本
+          2.在坐标的<version>标签中，通过${依赖名称.version}来引入声明的版本
+
+
+      -->
+    <junit.version>4.11</junit.version>
+    <servlet.version>3.0.1</servlet.version>
+  </properties>
+
+
+  <!-- 依赖 -->
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+
+    <!-- servlet依赖-->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${servlet.version}</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <!-- 项目构建相关 -->
+  <build>
+    <!-- 最终构建名称-->
+    <finalName>demo_02_maven_javaweb</finalName>
+    <!--
+        pluginManagement: 仅仅用来声明插件的版本的，并不会真的去引入插件。一般是用在父工程中，统一所有子工程的插件版本号的
+
+     -->
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+
+
+
+
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <!-- tomcat7插件,命令： mvn tomcat7:run -DskipTests -->
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <uriEncoding>utf-8</uriEncoding>
+          <port>8080</port>
+          <path>/</path>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

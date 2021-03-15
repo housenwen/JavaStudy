@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.itheima</groupId>
+    <artifactId>demo_03_mavan_javaweb</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- 声明web工程，需要打war包-->
+    <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+    <!-- 依赖声明的父标签 -->
+    <dependencies>
+
+        <!--  依赖的坐标，通过GroupId+artifactId+version三者合一去本地仓库寻找依赖的 -->
+        <dependency>
+            <!-- 依赖的组织机构名 -->
+            <groupId>junit</groupId>
+            <!-- 依赖的项目名 -->
+            <artifactId>junit</artifactId>
+            <!-- 依赖的版本号-->
+            <version>4.11</version>
+            <!-- 依赖的范围-->
+            <scope>test</scope>
+        </dependency>
+
+
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.38</version>
+        </dependency>
+
+
+        <!-- servlet依赖-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <!-- 必须是provided,不能作用于运行时，因为tomcat自带了。 -->
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <!-- java编译插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <!-- tomcat7插件,命令： mvn tomcat7:run -DskipTests -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <!-- 解决get乱码问题！！ -->
+                    <uriEncoding>utf-8</uriEncoding>
+                    <!-- 端口号 -->
+                    <port>8080</port>
+                    <!-- 项目发布时的虚拟路径 -->
+                    <path>/</path>
+                </configuration>
+            </plugin>
+
+
+        </plugins>
+    </build>
+</project>

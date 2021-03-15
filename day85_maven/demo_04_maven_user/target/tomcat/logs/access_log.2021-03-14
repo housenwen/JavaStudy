@@ -1,0 +1,13 @@
+0:0:0:0:0:0:0:1 - - [14/Mar/2021:16:24:40 +0800] "GET / HTTP/1.1" 200 2306 http-bio-8080-exec-1 470
+0:0:0:0:0:0:0:1 - - [14/Mar/2021:16:24:40 +0800] "GET /css/login.css HTTP/1.1" 200 793 http-bio-8080-exec-2 5
+0:0:0:0:0:0:0:1 - - [14/Mar/2021:16:24:40 +0800] "GET /css/bootstrap.css HTTP/1.1" 200 146010 http-bio-8080-exec-3 8
+0:0:0:0:0:0:0:1 - - [14/Mar/2021:16:24:40 +0800] "GET /CodeServlet HTTP/1.1" 404 973 http-bio-8080-exec-5 3
+0:0:0:0:0:0:0:1 - - [14/Mar/2021:16:24:43 +0800] "GET /findContactByPage?currentPage=1&pageSize=3 HTTP/1.1" 200 7834 http-bio-8080-exec-6 1543
+0:0:0:0:0:0:0:1 - - [14/Mar/2021:16:24:43 +0800] "GET /js/jquery-2.1.0.min.js HTTP/1.1" 200 83617 http-bio-8080-exec-4 3
+0:0:0:0:0:0:0:1 - - [14/Mar/2021:16:24:43 +0800] "GET /css/bootstrap.min.css HTTP/1.1" 200 121200 http-bio-8080-exec-7 4
+0:0:0:0:0:0:0:1 - - [14/Mar/2021:16:24:43 +0800] "GET /js/bootstrap.min.js HTTP/1.1" 200 37045 http-bio-8080-exec-8 3
+0:0:0:0:0:0:0:1 - - [14/Mar/2021:16:24:43 +0800] "GET /fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 18028 http-bio-8080-exec-8 3
+0:0:0:0:0:0:0:1 - - [14/Mar/2021:16:24:45 +0800] "GET /findContactByPage?currentPage=2&pageSize=3&name=&min=&max= HTTP/1.1" 200 8176 http-bio-8080-exec-8 10
+0:0:0:0:0:0:0:1 - - [14/Mar/2021:16:24:46 +0800] "GET /findContactByPage?currentPage=3&pageSize=3&name=&min=&max= HTTP/1.1" 200 8183 http-bio-8080-exec-8 6
+0:0:0:0:0:0:0:1 - - [14/Mar/2021:16:24:46 +0800] "GET /findContactByPage?currentPage=4&pageSize=3&name=&min=&max= HTTP/1.1" 200 8181 http-bio-8080-exec-8 8
+0:0:0:0:0:0:0:1 - - [14/Mar/2021:16:24:47 +0800] "GET /findContactByPage?currentPage=5&pageSize=3&name=&min=&max= HTTP/1.1" 200 8190 http-bio-8080-exec-8 10
