@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <select id="province" onchange="addCity(this.value)" >
+        <option>---请选择省---</option>
+    </select>
+    <select id="city">
+        <option>---请选择城市---</option>
+    </select>
+   
+</body>
+<script src="js/jquery-2.1.0.js"></script>
+<script>
+    
+    //添加省的信息
+    function addProvince() {
+        $.ajax({
+            url:"areaServlet",
+            data:{
+                "pid":0
+            },
+            dataType:"json",
+            success:function (res) {
+                /*
+                       res就是响应的所有省的json数组对象
+                        [
+                            {id:v,name:v,pid:v},
+                            {id:v,name:v,pid:v},
+                            {id:v,name:v,pid:v}
+                        ]
+                 */
+                let str = "<option>---请选择省---</option>";
+                //1.遍历
+                for(let province of res){
+                    //2.创建<option>---省的名字---</option>
+                    str+="<option value='"+province.id+"'>"+province.name+"</option>";
+
+                }
+                //3.填充到省的下拉列表框下
+                document.getElementById("province").innerHTML=str;
+
+            }
+        });
+    }
+    
+    addProvince();
+
+
+    function addCity(pid) {
+        $.ajax({
+            url:"areaServlet",
+            data:{
+                "pid":pid //选中省的id
+            },
+            dataType:"json",
+            success:function (res) {
+                //请求成功的回调函数
+                let str = "<option>---请选择市---</option>";
+                //1.遍历
+                for(let city of res){
+                    //2.创建<option>---省的名字---</option>
+                    str+="<option value='"+city.id+"'>"+city.name+"</option>";
+
+                }
+                //3.填充到城市的下拉列表框下
+                document.getElementById("city").innerHTML=str;
+            }
+        });
+    }
+</script>
+</html>
