@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="异步" onclick="js_ajax()"><br>
+<input type="button" value="同步" onclick="js_ajax2()"><br>
+<input type="button" value="普通按钮" onclick="alert('点的好')"><br>
+<span id="mySpan" style="color: red">此处用来显示服务器响应的数据</span>
+</body>
+
+<script>
+
+
+
+
+    function js_ajax() {
+        //创建ajax引擎对象
+        let request = new XMLHttpRequest();
+
+        //绑定onreadystatechange事件，作为响应成功时的回调函数
+        /**
+         *
+         *      readystate:
+         *      HTTP 请求的状态.当一个 XMLHttpRequest 初次创建时，
+         *      这个属性的值从 0 开始，直到接收到完整的 HTTP 响应，这个值增加到 4。
+
+                 0 Uninitialized 初始化状态。XMLHttpRequest 对象已创建或已被 abort() 方法重置。
+                 1 Open open() 方法已调用，但是 send() 方法未调用。请求还没有被发送。
+                 2 Sent Send() 方法已调用，HTTP 请求已发送到 Web 服务器。未接收到响应。
+                 3 Receiving 所有响应头部都已经接收到。响应体开始接收但未完成。
+                 4 Loaded HTTP 响应已经完全接收。
+
+
+                status : http协议响应的状态码
+                        200：表示ok
+                        404： 表示 找不到资源
+                        302：表示重定向的
+
+                responseText ： 服务器给出的响应体
+
+         */
+        request.onreadystatechange=function () {
+            //响应成功的回调函数
+            if(request.readyState==4&&request.status==200){
+                //获取响应体
+                let responseText = request.responseText;
+                //dom操作
+                document.getElementById("mySpan").innerHTML=responseText;
+            }
+        }
+
+        //通过open方法设置请求的参数
+        /**
+         *   method:请求的方式
+         *   url:请求的地址
+         *   async:是否异步，true表示异步
+         *
+         */
+        request.open("get","demoServlet",true);
+
+        //通过send方法发送请求
+        request.send();
+    }
+
+
+
+    function js_ajax2() {
+        //创建ajax引擎对象
+        let request = new XMLHttpRequest();
+
+        //绑定onreadystatechange事件，作为响应成功时的回调函数
+        request.onreadystatechange=function () {
+            //响应成功的回调函数
+            if(request.readyState==4&&request.status==200){
+                //demo(request.responseText);
+                    //获取响应体
+                    let responseText = request.responseText;
+                    //dom操作
+                    document.getElementById("mySpan").innerHTML=responseText;
+            }
+        }
+
+        //通过open方法设置请求的参数
+        request.open("get","demoServlet",false);
+
+        //通过send方法发送请求
+        request.send();
+    }
+
+    // function demo(responseText) {
+    //     //获取响应体
+    //     //let responseText = request.responseText;
+    //     //dom操作
+    //     document.getElementById("mySpan").innerHTML=responseText;
+    // }
+    
+</script>
+</html>

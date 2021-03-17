@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="button" value="jquery_get" onclick="jquery_get()"><br>
+    <input type="button" value="jquery_post" onclick="jquery_post()"><br>
+    <input type="button" value="jquery_ajax" onclick="jquery_ajax()"><br>
+    <span id="mySpan" style="color: red">此处用来显示服务器响应的数据</span>
+</body>
+<script src="js/jquery-2.1.0.js"></script>
+<script>
+    
+    function jquery_get() {
+        $.get("demoServlet",{"username":"zhangsan"},function (data) {
+
+            //将响应体设置到myspan中
+            document.getElementById("mySpan").innerHTML=data;
+        });
+    }
+
+    function jquery_post() {
+        $.post("demoServlet",{"username":"zhangsan"},function (data) {
+
+            //将响应体设置到myspan中
+            document.getElementById("mySpan").innerHTML=data;
+        });
+    }
+
+
+    function jquery_ajax() {
+
+        $.ajax({
+            url:"demoServlet",
+            data:{
+                "username":"lisi"
+            },
+            async:true,
+            type:"get",
+            success:function (res) {
+                //请求成功的回调函数，参数就是响应体
+                document.getElementById("mySpan").innerHTML=res;
+            }
+        });
+    }
+
+</script>
+</html>

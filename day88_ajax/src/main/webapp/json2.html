@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="按钮" onclick="jsonDemo()">
+<div id="mydiv">此div用来显示用户的名字</div>
+</body>
+<script src="js/jquery-2.1.0.js"></script>
+<script>
+    function jsonDemo() {
+
+        $.ajax({
+            url:"http://localhost:8088/areaServlet",
+            dataType:"json",//将响应的内容转换成json对象
+            data:{"pid":"0"},
+            success:function (res) {
+                console.log(res);
+                document.getElementById("mydiv").innerHTML=res.name;
+            }
+        });
+
+    }
+</script>
+</html>

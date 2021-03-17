@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+
+    /**
+     *  json格式：
+     *
+     *
+     *      1.json对象 ：
+     *          {key:value,key:value}
+     *
+     *      2.json数组：
+     *          [
+     *              {key:value,key:value},
+     *              {key:value,key:value},
+     *              {key:value,key:value}
+     *              ...
+     *
+     *          ]
+     *
+     *
+     *     注意：
+     *      1.json对象是一个对象，json字符串是一个字符串，只是字符串的格式是json格式
+     *      2.对于json的key，在js中可加或者不加引号，但是要求大家全部加上双引号。
+     *      3.value可以是任意数据类型(字符串，数组，json，json数组，函数....)
+     *
+     */
+
+     //json对象
+     let jsonObj = {"name":"泰日天","type":"泰迪"};
+     //json字符串
+     let jsonObjStr = "{'name':'泰日天','type':'泰迪'}";
+
+
+    //
+    console.log(jsonObj);
+    //console.log(jsonObj.type)
+
+    console.log(jsonObjStr);
+
+
+    // let animalsJsonArray = [
+    //         {"name":"小蓝","type":"蓝猫"},
+    //         {"name":"小白","type":"狗"},
+    //         {"name":"小红","type":"鸡","description":"家禽"}
+    //     ];
+    //
+    // for(let animal of animalsJsonArray){
+    //     console.log(animal.name);
+    // }
+
+
+    // let person = {
+    //      "name":"超超",
+    //      "sex":"male",
+    //      "dog":{
+    //          "name":"小超",
+    //          "type":"泰迪"
+    //      },
+    //      "skill":function () {
+    //          console.log("学过就忘");
+    //      }
+    //     };
+    //
+    // console.log(person.name);
+    // console.log(person.dog.name);
+    // person.skill();
+</script>
+</html>
