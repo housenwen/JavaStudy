@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--
+        this指代当前标签对象
+
+    -->
+    用户名: <input type="text" value="" name="username" onblur="validateUsername(this.value)">
+    <span id="myspan"></span>
+</body>
+<script src="js/jquery-2.1.0.js"></script>
+<script>
+
+    function validateUsername(username) {
+
+        //document.getElementById("").value;
+
+        $.ajax({
+            url:"validateUsername",
+            data:{
+                "username":username
+            },
+            success:function (res) {
+                //console.log(typeof(res)+":"+res);
+                //这是请求成功的回调函数，res是响应体
+
+                let myspan = document.getElementById("myspan");
+                if(res=="true"){
+                    //校验成功
+                    //设置标签的文本值
+                    myspan.innerHTML="用户名可用";
+                    //修改css样式
+                    myspan.style.color="green";
+                }else if(res=="false"){
+                    //校验失败a
+                    //设置标签的文本值
+                    myspan.innerHTML="用户名已存在";
+                    //修改css样式
+                    myspan.style.color="red";
+                }
+            }
+        });
+    }
+    
+</script>
+</html>

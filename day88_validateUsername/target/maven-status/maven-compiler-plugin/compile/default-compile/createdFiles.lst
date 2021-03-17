@@ -1,0 +1,6 @@
+com\itheima\web\ValidateUsernameServlet.class
+com\itheima\pojo\User.class
+com\itheima\service\UserService.class
+com\itheima\utils\SqlSessionUtil.class
+com\itheima\dao\UserMapper.class
+com\itheima\service\impl\UserServiceImpl.class

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="button" value="跨域" onclick="demo()">
+</body>
+<script src="js/jquery-2.1.0.js"></script>
+<script>
+
+
+    function demo() {
+        $.ajax({
+            url:"http://localhost:8080/demoServlet",
+            data:{
+                "username":"kuayu"
+            },
+            success:function (res) {
+                alert(res);
+            }
+        });
+    }
+
+</script>
+</html>
