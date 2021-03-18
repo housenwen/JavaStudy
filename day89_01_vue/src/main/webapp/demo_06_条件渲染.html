@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染</title>
+</head>
+<body>
+    <div id="div">
+        <!-- 判断num的值，对3取余
+            余数为0显示div1
+            余数为1显示div2
+            余数为2显示div3 -->
+        <div v-if="num%3==0">div1</div>
+        <div v-if="num%3==1">div2</div>
+        <div v-if="num%3==2">div3</div>
+
+
+        <div v-show="flag">div4</div>
+
+        <!--
+           v-if  v-show 他们俩虽然都是控制元素是否显示，但是底层的原理不一样
+               v-if 如果条件为false，页面中根本没有这个元素
+               v-show如果条件为false，页面中有这个元素只不过它的display属性值为none
+       -->
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el:"#div",
+        data:{
+            num:1,
+            flag:false
+        }
+    });
+</script>
+</html>

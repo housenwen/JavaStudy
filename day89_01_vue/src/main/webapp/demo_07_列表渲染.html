@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表渲染</title>
+</head>
+<body>
+    <div id="div">
+        <ul>
+            <!--
+               类似于增强for循环
+               1. element是遍历得到的每一个元素(变量名可以自定义)
+                   有一个作用域,它的作用于在当前的这个循环中
+               2. names 是被遍历的数组或对象
+                   -->
+            <li v-for="name in names" v-html="name">
+
+            </li>
+            <li v-for="(value,index) in names">
+                {{value}}:{{index}}
+            </li>
+            <!--
+                类似于普通for循环
+            -->
+            <li v-for="value in student">
+                {{value}}
+            </li>
+
+            <li v-for="(value,key) in student">
+                {{value}}:{{key}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el:"#div",
+        data:{
+            names:["张三","李四","王五"],
+            student:{
+                name:"张三",
+                age:23
+            }
+        }
+    });
+</script>
+</html>

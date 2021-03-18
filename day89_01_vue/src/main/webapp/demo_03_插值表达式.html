@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="mydiv">
+        <h1>用户名:{{username}}</h1>
+        <div>{{str}}</div>
+    </div>
+
+</body>
+<script src="js/vue.js"></script>
+<script>
+
+    /*
+         {{key}} 用于获取data中的内容显示到页面上的,不太推荐
+            1.只能显示文本
+            2.存在插值闪烁的现象，针对用户体验不好。
+
+     */
+
+
+
+    new Vue({
+        el:"#mydiv",
+        data:{
+            username:"张三",
+            str:"<a href='http://www.baidu.com'>百度</a>"
+        }
+    });
+
+</script>
+</html>

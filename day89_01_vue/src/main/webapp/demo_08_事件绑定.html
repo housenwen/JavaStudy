@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件绑定</title>
+</head>
+
+<body>
+    <div id="div">
+        <div>{{name}}</div>
+
+        <!--
+            v-on：为 HTML 标签绑定事件,其中v-on:可以简写成@
+
+            注意：js语法绑定函数，函数必须是js的。
+                 vue语法绑定函数，函数必须是vue对象的。
+
+
+        -->
+        <button v-on:click="change()">单击_改变div的内容</button>
+        <button v-on:dblclick="change()">双击_改变div的内容</button>
+
+        <button @click="change()">简写_改变div的内容</button>
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el:"#div",
+        data:{
+            name:"黑马程序员"
+        },
+        methods:{
+            change(){
+                //this指代的是vue对象
+                //针对于vue对象的data中的属性访问，vue直接做了简化，  vue对象.属性名
+                this.name = "传智播客"
+            }
+        }
+    });
+
+
+    //
+    // function demo() {
+    //     alert("你好");
+    // }
+
+</script>
+</html>

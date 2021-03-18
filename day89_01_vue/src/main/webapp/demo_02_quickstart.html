@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="vue_det">
+        <!-- {{key}} 插值表达式，用于获取vue对象的data中的数据，显示在页面上的   -->
+        <h1>site : {{site}}</h1>
+        <h1>url : {{url}}</h1>
+        <h1>{{details()}}</h1>
+    </div>
+    <h1>site : {{site}}</h1>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#vue_det',  //声明vue作用的视图范围
+        data: {
+            site: "菜鸟教程",
+            url: "www.runoob.com",
+            alexa: "10000"
+        }, //声明的是数据
+        methods: { //声明vue对象的函数
+            details: function() {
+                return  this.site + " - 学的不仅是技术，更是梦想！";
+            }
+        }
+    })
+</script>
+</html>

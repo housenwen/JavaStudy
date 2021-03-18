@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="mydiv">
+
+        {{message}}
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/axios-0.18.0.js"></script>
+<script>
+    new Vue({
+        el:"#mydiv",
+        data:{
+            message:""
+        },
+        created(){
+            //ajax请求后台数据，初始化数据
+            axios.get("demoServlet",{"params":{
+                    "username":"zhangsan",
+                    "password":"123456"
+                }})
+                .then(response=> {
+
+                    //请求成功的回调函数的参数
+                    /**
+                     *  response是vue的ajax请求的响应对象：
+                     *  {
+                              // `data` 由服务器提供的响应
+                              data: {},
+
+                              // `status`  HTTP 状态码
+                              status: 200,
+
+                              // `statusText` 来自服务器响应的 HTTP 状态信息
+                              statusText: "OK",
+
+                              // `headers` 服务器响应的头
+                              headers: {},
+
+                              // `config` 是为请求提供的配置信息
+                              config: {}
+                            }
+                     *
+                     */
+                    console.log(response.data);
+                    //属性赋值
+                    this.message=response.data;
+                })
+        }
+    });
+</script>
+</html>

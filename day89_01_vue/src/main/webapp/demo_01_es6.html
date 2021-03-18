@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+/*    let username = "zhangsan";
+
+
+    //console.log("姓名是:"+username);
+    // 字符串模板，注意是反引号（esc下面的按键）。
+    console.log(`姓名是:${username}`);
+
+
+
+    //函数默认值
+    function demo(username='lisi') {
+        console.log(username);
+    }
+
+    demo();*/
+
+
+
+
+    //箭头函数
+    let demo = function (a,b) {
+        return a+b;
+    }
+
+    console.log(demo(2,5));
+
+
+    let demo = (a,b)=>{
+        return a+b;
+    }
+
+    console.log(demo(3,6));
+
+
+
+
+    //解构
+    let person = {"username":"zhangsan","password":"123"};
+
+
+
+    const {username,password}=person;
+
+    console.log(username);
+</script>
+</html>

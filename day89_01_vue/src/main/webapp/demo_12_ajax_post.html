@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="mydiv">
+
+        {{message}}
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/axios-0.18.0.js"></script>
+<script>
+    new Vue({
+        el:"#mydiv",
+        data:{
+            message:""
+        },
+        created(){
+            //ajax请求后台数据，初始化数据
+            axios.post("demoServlet",{
+                "username":"zhangsan",
+                "password":"123456"
+            })
+                .then(response=> {
+
+                    //属性赋值
+                    this.message=response.data;
+                })
+        }
+    });
+</script>
+</html>

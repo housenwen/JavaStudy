@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div id="mydiv">
+        <form>
+            用户名：<input type="text" v-model="formData.username" ><br>
+            密码: <input type="password" v-model="formData.password" ><br>
+            性别：
+            <input type="radio"  value="male" v-model="formData.sex" >男
+            <input type="radio"  value="female" v-model="formData.sex">女
+            <br>
+            <!--爱好：-->
+            <input type="checkbox" v-model="formData.hobby" value="洗澡">洗澡
+            <input type="checkbox" v-model="formData.hobby" value="看电视">看电视
+            <input type="checkbox" v-model="formData.hobby" value="睡觉">睡觉
+            <br>
+            学历
+            <select v-model="formData.education">
+                <option value="初中">初中</option>
+                <option value="高中">高中</option>
+                <option value="大专">大专</option>
+                <option value="本科">本科</option>
+            </select><br>
+
+            <input type="button" @click="register()"  value="提交">
+        </form>
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/axios-0.18.0.js"></script>
+<script src="js/qs.js"></script>
+<script>
+
+
+    new Vue({
+        el:"#mydiv",
+        data:{
+            //接受表单数据
+            formData:{
+                username:"",
+                password:"",
+                sex:"",
+                education:"",
+                hobby:[]
+            }
+        },
+        methods:{
+            register:function () {
+                //ajax请求
+                axios.get("registerServlet",{
+                    params:this.formData,
+                    paramsSerializer: function(params) {
+                        return Qs.stringify(params, {arrayFormat: "repeat"})
+                    },})
+                    .then(response=>{
+                        console.log(response.data);
+                    })
+            }
+        }
+    });
+</script>
+</html>

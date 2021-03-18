@@ -1,0 +1,8 @@
+com\itheima\service\AreaService.class
+com\itheima\utils\JedisUtils.class
+com\itheima\web\AreaServlet.class
+com\itheima\service\impl\AreaServiceImpl.class
+com\itheima\utils\SqlSessionUtil.class
+com\itheima\web\RegisterServlet.class
+com\itheima\dao\AreaMapper.class
+com\itheima\pojo\Area.class

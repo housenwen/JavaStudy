@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="mydiv">
+
+        {{message}}
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/axios-0.18.0.js"></script>
+<script>
+
+
+
+
+  var vue2 =  new Vue({
+        el:"#mydiv",
+        data:{
+            message:""
+        },
+        created(){
+            //ajax请求后台数据，初始化数据
+            axios.get("demoServlet",{"params":{
+                    "username":"zhangsan",
+                    "password":"123456"
+                }})
+                .then(function (response) {
+                    //匿名函数中，this指代的是调用当前函数的对象，此处的this是window
+                    console.log(this);
+
+                    this.vue2._data.message=response.data;
+                })
+                // .then(response=> {
+                //     //属性赋值，箭头函数的this，指代的是函数的父级作用于的this
+                //     this.message=response.data;
+                // })
+        }
+    });
+</script>
+</html>

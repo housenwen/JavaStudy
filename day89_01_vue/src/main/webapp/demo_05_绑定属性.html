@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绑定属性</title>
+    <style>
+        .my{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div">
+        <!--
+            插件表达式不能写在属性中
+        -->
+        <a href="{{url}}">百度一下</a>
+
+        <br>
+        <!--
+            v-bind：为 HTML 标签绑定属性值
+        -->
+        <a v-bind:href="url">百度一下</a>
+        <br>
+        <!--
+            v-bind 可以省略不写
+        -->
+        <a :href="url">百度一下</a>
+        <br>
+        <!--
+            也可以绑定其他属性
+        -->
+        <div :class="cls">我是div</div>
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+
+    /*
+        v-bind : 属性绑定，给标签的属性绑定vue对象的data属性中的数据
+
+            注意：v-bind可以省略，但是标签属性前面一定要有:
+
+     */
+
+    new Vue({
+        el:"#div",
+        data:{
+            url:"https://www.baidu.com",
+            cls:"my"
+        }
+    });
+</script>
+</html>

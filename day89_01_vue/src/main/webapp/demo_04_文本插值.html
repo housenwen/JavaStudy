@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="mydiv">
+        <h1>用户名:<span v-html="username"></span></h1>
+        <div v-html="str"></div>
+    </div>
+
+</body>
+<script src="js/vue.js"></script>
+<script>
+
+    /*
+        v-html: 作用和js中的innerHTML属性的作用一致。
+                将vue对象中的data中的数据，设置到标签体中。能够解析标签
+
+     */
+
+    new Vue({
+        el:"#mydiv",
+        data:{
+            username:"张三",
+            str:"<a href='http://www.baidu.com'>百度</a>"
+        }
+    });
+
+</script>
+</html>
