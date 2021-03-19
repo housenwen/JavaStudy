@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="mydiv">
+
+        <el-pagination
+                background
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[10, 20, 30, 40]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="505">
+        </el-pagination>
+    </div>
+</body>
+<!-- 引入vue资源-->
+<script src="js/vue.js"></script>
+<!-- 引入elementUI资源-->
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+<script>
+
+
+    new Vue({
+        el:"#mydiv",
+        data:{
+            currentPage4:3
+        },
+        methods: {
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+            }
+        }
+    });
+</script>
+</html>

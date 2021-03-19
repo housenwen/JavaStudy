@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="mydiv">
+    <el-progress :percentage="num"></el-progress>
+</div>
+</body>
+<!-- 引入vue资源-->
+<script src="js/vue.js"></script>
+<!-- 引入elementUI资源-->
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+<script>
+
+
+    var vue = new Vue({
+        el:"#mydiv",
+        data:{
+            num:0
+        },
+        created(){
+            setInterval(function () {
+                vue.$data.num++;
+            },300)
+        }
+    });
+</script>
+</html>
