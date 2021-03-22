@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户管理系统</title>
+    <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+    <script src="js/vue.js"></script>
+    <script src="element-ui/lib/index.js"></script>
+    <script src="js/axios-0.18.0.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="div">
+            <div class="content-header common-search-border1">
+                <el-button class="butAdd" @click="handleCreate"> 新增用户
+                </el-button>
+            </div>
+
+        <div class="app-container">
+            <div class="box common-search-border2">
+                <div class="filter-container">
+                    <!-- TODO: 搜索栏 -->
+                    <!--
+                        :inline="true	行内表单模式 (表单项横向排列)
+                        :model="queryParams"  数据绑定
+                        ref="queryParams" 用于找到本表单使用
+                    -->
+                    <el-form :inline="true" :model="queryParams" ref="queryParams"
+                             class="formInfo">
+                        <el-form-item label="用户名称" label-width="80px">
+                            <el-input placeholder="请输入" v-model="queryParams.username"
+                                      style="width: 200px;" class="filter-item"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button @click="handleRest">清除</el-button>
+                            <el-button type="primary" class="butOK" @click="handleSearch">搜索</el-button>
+                        </el-form-item>
+                    </el-form>
+                </div>
+            </div>
+            <div class="box common-table-border" style="margin:8px 0 0;">
+                <!--
+                    TODO: 用户列表
+                -->
+                <!--
+                    data	显示的数据
+                    fit	列的宽度是否自撑开
+                -->
+                <el-table
+                        :data="userList"
+                        fit
+                        style="width: 100%;">
+
+                    <el-table-column label="编号" width="50px" align="center" prop="id">
+                    </el-table-column>
+                    <el-table-column label="用户名" align="center" prop="username">
+                    </el-table-column>
+                    <el-table-column label="邮箱" align="center"  prop="email">
+                    </el-table-column>
+                    <el-table-column label="创建日期" align="center" prop="createTime">
+                    </el-table-column>
+                    <el-table-column label="修改日期" align="center" prop="updateTime">
+                    </el-table-column>
+
+                    <el-table-column
+                            label="角色"
+                            width="120"
+                            align="center">
+                        <!--
+                           slot-scope = "scope"
+                               用于指定当前的数据(本案例是userList中的当前行元素)
+                       -->
+                        <template slot-scope="scope">
+                            <!--
+                                悬浮提示信息展示框
+                                    trigger = "hover" 鼠标移上去触发
+                                    placement="left" 悬浮框显示位置在左边
+
+                            -->
+                            <el-popover v-for="role in scope.row.roles" trigger="hover" placement="left">
+                                <!-- 前两个p标签是提示信息, div标签是展示信息 -->
+                                <p style="font-size: 10px;color: blue">角色编号: {{ role.id }}</p>
+                                <p style="font-size: 10px;color: blue">角色描述: {{ role.description }}</p>
+                                <div slot="reference" class="name-wrapper">
+                                    <el-tag size="medium">{{ role.name }}</el-tag>
+                                </div>
+                            </el-popover>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作" width="180">
+                        <template slot-scope="scope">
+                            <!--
+                                 TODO: 修改和删除
+                             -->
+                            <div class="operation" v-if="scope.row.username != 'admin'">
+                                <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">修改
+                                </el-button>
+                                <el-button size="mini" type="danger" @click="handleDeleted(scope.row)"> 删除
+                                </el-button>
+                            </div>
+                        </template>
+                    </el-table-column>
+
+                </el-table>
+                <!--
+                     TODO: 分页组件
+                       @size-change： 当改变每页条数时触发的函数
+                       @current-change：当改变页码时触发的函数
+                       current-page ：默认的页码
+                       :page-sizes：每页条数选择框中显示的值
+                       :page-size : 默认的每页条数
+                       layout： 分页组件的布局
+                           total（总条数）, sizes(每页条数), prev（上一页）, pager(所有的页码), next(下一页), jumper（跳转页码）
+                       :total: 总条数
+                 -->
+                <div class="pagination-container">
+                    <el-pagination
+                            class="pagiantion"
+                            v-show="pagination.total>0"
+                            @size-change="handleSizeChange"
+                            @current-change="handleCurrentChange"
+                            :current-page="pagination.pageNum"
+                            :page-sizes="[3, 5, 10, 15]"
+                            :page-size="pagination.pageSize"
+                            layout="total, sizes, prev, pager, next, jumper"
+                            :total="pagination.total">
+                    </el-pagination>
+                </div>
+            </div>
+            <!--TODO: 新增用户弹层
+                   :visible.sync 是否显示 (dialogFormVisible=true 显示, =false隐藏)
+            -->
+            <el-dialog title="新增用户" align="left" :visible.sync="dialogFormVisible" width="40%" top="8vh">
+                <!--
+                    model	表单数据对象
+                    rules	表单验证规则
+                -->
+                <el-form label-width="120px" :model="user" :rules="rules" ref="form">
+                    <!--
+                    prop	表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的
+                    -->
+                    <el-form-item label="用户名称：" prop="username">
+                            <!-- v-model 双向数据绑定  autocomplete=off 取消自动补全功能-->
+                        <el-input v-model="user.username" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="邮箱：" prop="email">
+                        <el-input v-model="user.email" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="密码：" prop="password">
+                        <el-input type="password" v-model="user.password" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <!--
+                        TODO: 动态获取角色
+                    -->
+                    <el-form-item label="角色: " prop="roleIds">
+                        <!--
+                         value / v-model	绑定值 (双向数据绑定)
+                            multiple	是否多选
+                        -->
+                        <el-select v-model="user.roleIds" multiple placeholder="请选择(默认游客)">
+                            <!--
+                                value	选项的值	string/number/object
+                                label	选项的标签，若不设置则默认与 value 相同 (显示出来的标签名)
+                                key     文档中没有说明, 就是取值跟value相同,删除也不影响本组件使用
+                            -->
+                            <el-option
+                                    v-for="role in roleList"
+                                    :key="role.id"
+                                    :label="role.name"
+                                    :value="role.id">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+
+                    <el-form-item label="备注：" prop="remark">
+                        <el-input v-model="user.remark" autocomplete="off"></el-input>
+                    </el-form-item>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="handleCreateCancel">取 消</el-button>
+                    <el-button type="primary" @click="handleCreateConfirm">确 定</el-button>
+                </div>
+            </el-dialog>
+            <!-- end -->
+            <!-- 修改用户弹层 -->
+            <el-dialog title="修改用户" align="left" :visible.sync="dialogUptFormVisible" width="40%" top="8vh">
+                <el-form label-width="120px" :model="updateUser" :rules="rules" ref="uptForm">
+                    <el-form-item label="用户名称：" prop="username">
+                        <el-input v-model="updateUser.username" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="邮箱：" prop="email">
+                        <el-input v-model="updateUser.email" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="密码：" prop="password">
+                        <el-input type="password" v-model="updateUser.password" autocomplete="off"></el-input>
+                    </el-form-item>
+
+                    <el-form-item label="角色: " prop="roleIds">
+                        <el-select v-model="updateUser.roleIds" multiple placeholder="请选择(默认游客)">
+                            <el-option
+                                    v-for="role in roleList"
+                                    :key="role.id"
+                                    :label="role.name"
+                                    :value="role.id">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="handleUpdateCancel">取 消</el-button>
+                    <el-button type="primary" @click="handleUpdateConfirm">确 定</el-button>
+                </div>
+            </el-dialog>
+            <!-- end -->
+        </div>
+    </div>
+</body>
+<script>
+
+    new Vue({
+        el: "#div",
+        data: {
+            pagination: {
+                total: 0,  //总条数
+                pageNum: 1, // //当前页
+                pageSize: 5 //每页显示条数
+            },
+            userList: [],  //用户列表数据
+            roleList: [], // 角色列表数据
+            queryParams: { // 搜索条件
+                username: ''
+            },
+            dialogFormVisible: false, // 添加窗口显示状态
+            dialogUptFormVisible: false,//修改窗口显示状态
+            user: { // 用户数据
+                username: '',
+                email: '',
+                password: '',
+                remark: '',
+                roleIds: ''
+            },
+            updateUser: { //用户的修改数据
+                id: "",
+                username: '',
+                email: '',
+                password: '',
+                roleIds: []
+            },
+            rules: { //校验规则
+                username: [
+                    {required: true, message: '请填写', trigger: 'blur'}
+                ],
+                email: [
+                    {required: true, message: '请填写', trigger: 'blur'},
+                    {type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
+                ],
+                password: [
+                    {required: true, message: '请填写', trigger: 'blur'}
+                ]
+            }
+
+        },
+        created() {
+            //TODO: 页面加载好之前的查询工作
+            this.getUserList();
+
+
+        },
+        methods: {
+            //TODO: 获取数据
+            getUserList() {
+
+                axios.get("userServlet?methodName=findUserByPage",{"params":this.pagination})
+                    .then(response=>{
+
+                        //分页用户数据
+                        this.userList = response.data.userList;
+
+                        //分页组件的数据总量
+                        this.pagination.total = response.data.total;
+                    });
+
+
+
+                // 以下是伪数据
+
+                // let response = {
+                //     data:{
+                //         "flag": true,
+                //         "message": "获取用户列表成功",
+                //         "result": {
+                //             "rows": [
+                //                 {
+                //                     "createTime": "2020-05-20 00:00:00.0",
+                //                     "updateTime": "2020-05-20 00:00:00.0",
+                //                     "id": 1,
+                //                     "username": "zs",
+                //                     "password": "123",
+                //                     "remark" : "管理员",
+                //                     "email" : "zs@itcast.cn",
+                //                     "roleIds" : "[2]",
+                //                     "roles" : [
+                //                             {
+                //                                 "id": "1",
+                //                                 "name": "A管理员",
+                //                                 "description" : "A模块的管理员"
+                //                             },
+                //                             {
+                //                                 "id": "3",
+                //                                 "name": "B管理员",
+                //                                 "description" : "B模块的管理员"
+                //                             }
+                //                     ]
+                //                 },
+                //                 {
+                //                     "createTime": "2020-05-20 00:00:00.0",
+                //                     "updateTime": "2020-05-20 00:00:00.0",
+                //                     "id": 1,
+                //                     "username": "zs",
+                //                     "password": "123",
+                //                     "remark" : "管理员",
+                //                     "email" : "zs@itcast.cn",
+                //                     "roleIds" : ["2"],
+                //                     "roles" : [
+                //                         {
+                //                             "id": "1",
+                //                             "name": "A管理员",
+                //                             "description" : "A模块的管理员"
+                //                         },
+                //                         {
+                //                             "id": "3",
+                //                             "name": "B管理员",
+                //                             "description" : "B模块的管理员"
+                //                         }
+                //                     ]
+                //                 }
+                //             ],
+                //             "total": 15
+                //         }
+                //     }
+                // };
+                //
+                // // 指定总记录数
+                // this.pagination.total = response.data.result.total;
+                // // 执行分页显示的数据
+                // this.userList = response.data.result.rows;
+
+
+            },
+            //TODO: 查询角色表
+            getRoleList() {
+                //以下是伪数据,数据要从后台获取
+                let response = [
+                        {
+                            "id": "1",
+                            "name": "管理员"
+                        } ,
+                        {
+                            "id": "2",
+                            "name": "会员"
+                        },
+                        {
+                            "id": "3",
+                            "name": "游客"
+                        }
+                    ]
+
+                this.roleList = response
+
+            },
+            //将查询条件置空
+            handleRest() {
+                this.queryParams = {
+                    username: ''
+                }
+            },
+            //搜索
+            handleSearch() {
+                //将当前页码设置为1
+                this.pagination.pageNum = 1;
+                this.getUserList();
+            },
+            //每页数量改变的时候
+            handleSizeChange(val) {
+                this.pagination.pageSize = val;
+                this.pagination.pageNum = 1;
+                this.getUserList();
+            },
+            //当前页码改变的时候
+            handleCurrentChange(val) {
+                this.pagination.pageNum = val;
+                this.getUserList();
+            },
+            // 新增用户
+            handleCreate() {
+                if (this.$refs['form']) {
+                    this.$refs['form'].resetFields();
+                }
+                this.dialogFormVisible = true;
+
+            },
+            //新增用户确定 TODO:
+            handleCreateConfirm() {
+                var t = this;
+                this.$refs['form'].validate((valid) => {
+                    if (valid) {
+
+                    }
+                });
+            },
+            //新增用户取消
+            handleCreateCancel() {
+                this.dialogFormVisible = false;
+            },
+            // 修改用户
+            handleUpdate(row) {
+                var t = this;
+                if (t.$refs['uptForm']) {
+                    t.$refs['uptForm'].resetFields();
+                }
+                t.updateUser.id = row.id;
+                t.updateUser.username = row.username;
+                t.updateUser.password = row.password;
+                t.updateUser.email = row.email;
+                t.updateUser.roleIds = row.roleIds;
+
+                t.dialogUptFormVisible = true;
+
+            },
+            //修改用户确定 TODO
+            handleUpdateConfirm() {
+                this.$refs['uptForm'].validate((valid) => {
+                    if (valid) {
+
+                    }
+                });
+            },
+            //修改用户取消
+            handleUpdateCancel() {
+                this.dialogUptFormVisible = false;
+            },
+            // 删除用户 TODO
+            handleDeleted(row) {
+
+            }
+        }
+    })
+</script>
+</html>

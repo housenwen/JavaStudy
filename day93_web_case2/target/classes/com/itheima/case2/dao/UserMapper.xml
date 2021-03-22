@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+   mapper标签:配置各类声明
+   namespace：名称空间，由于映射文件可能有多个，为了防止crud语句的唯一标识被重复，需要设置空间名称。
+ -->
+
+<mapper namespace="com.itheima.case2.dao.UserMapper">
+    <!--
+        select:查询的statement（声明），用来编写查询语句
+        id:语句的唯一标识
+        resultType：配置返回的结果集类型
+        parameterType：传递的参数类型，可以省略
+    -->
+
+    <select id="findUserByPage" resultMap="userAndRole">
+        SELECT *,temp.id uid,r.id rid FROM (SELECT * FROM t_user LIMIT #{start},#{pageSize}) temp,
+               t_user_role ur,
+               t_role r
+         WHERE temp.id = ur.user_id
+         AND r.id = ur.role_id
+    </select>
+
+
+    <resultMap id="userAndRole" type="User" autoMapping="true">
+        <!-- 主键映射-->
+        <id column="uid" property="id"></id>
+
+        <!--user的roles属性映射-->
+        <collection property="roles" javaType="list" ofType="Role" autoMapping="true">
+            <id property="id" column="rid"></id>
+        </collection>
+    </resultMap>
+</mapper>
