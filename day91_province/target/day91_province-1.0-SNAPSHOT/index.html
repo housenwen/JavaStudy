@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="mydiv">
+        <select id="province" v-model="pid" @change="changeCity()" >
+            <option value="">---请选择省---</option>
+            <option v-for="province in provinces" :value="province.id"  v-html="province.name"></option>
+        </select>
+        <select id="city">
+            <option>---请选择城市---</option>
+            <option v-for="city in cities" :value="city.id" v-html="city.name"></option>
+        </select>
+
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/axios-0.18.0.js"></script>
+<script>
+
+    new Vue({
+        el:"#mydiv",
+        data:{
+            pid:"",//接受省的id
+            provinces:"",  //接受省的信息
+            cities:"" //接受当前省下面的城市信息
+
+        },
+        methods:{
+            //改变城市的下拉列表框
+            changeCity:function () {
+
+                axios.get("areaServlet",{"params":{
+                        "pid":this.pid
+                    }}).then(response=>{
+                        this.cities = response.data;
+                })
+            }
+        },
+        created:function () {
+            //页面加载完成，ajax请求所有的省的信息
+            axios.get("areaServlet?pid=0")
+                .then(response=>{
+                    //将响应体的所有省的信息赋值给data中的provinces属性
+                    this.provinces = response.data;
+                })
+        }
+
+    });
+
+</script>
+</html>
