@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--加载外部资源文件-->
+    <properties resource="jdbc.properties"/>
+
+    <settings>
+        <!--在控制台显示SQL语句-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <typeAliases>
+        <!--扫描pojo下的所有javabean-->
+        <package name="com.itheima.bean"/>
+    </typeAliases>
+
+    <!--mybatis环境的配置-->
+    <environments default="development">
+        <environment id="development">
+            <!--事务管理器：由JDBC来管理-->
+            <transactionManager type="JDBC"/>
+            <!--数据源的配置：mybatis自带的连接池-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+    </environments>
+    <mappers>
+        <!--xml配置: 文件路径 -->
+      <!--  <dao resource="com/itheima/user/dao/UserMapper.xml"/>-->
+        <!--注解 : 配置接口所在的位置-->
+         <package name="com.itheima.dao"/>
+    </mappers>
+</configuration>
