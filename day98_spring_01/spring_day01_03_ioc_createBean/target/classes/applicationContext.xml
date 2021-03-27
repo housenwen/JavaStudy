@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+
+    <!--
+        spring创建对象的3种方式：
+            1.默认无参构造
+
+            当对象无法通过构造的方式创建时，采用下面的方式。例如：mybaits中mapper对象的创建
+            2.工厂类的静态方法
+                a.工具声明静态方法，方法的实现来创建对象。
+                b.spring的xml中配置即可
+            3.工厂类的动态方法
+
+    -->
+
+<!--
+    <bean id="userService" class="com.itheima.service.UserServiceImpl"></bean>
+-->
+
+
+    <!-- 工厂类的静态方法-->
+<!--
+    <bean id="userService2" class="com.itheima.utils.BeansFactoryUtils" factory-method="getUserService" ></bean>
+-->
+
+
+    <!-- 工厂类的动态方法 -->
+    <bean id="beansFactory" class="com.itheima.utils.BeansFactoryUtils2"></bean>
+    <bean id="userService3" factory-bean="beansFactory"  factory-method="getUserService"></bean>
+</beans>

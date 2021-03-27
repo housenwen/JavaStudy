@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+
+    <!--
+        bean: 将对象装配到spring容器中。
+
+            id: bean的唯一标识
+            class:实现类的路径，底层采用反射创建对象
+            init-method:  初始化要调用的方法
+            destroy-method: 销毁时要调用的方法
+            scope: 声明bean的作用范围
+                singleton: 单例 （默认的）
+                    创建：初始化时（applicationContext）/第一次使用时（BeansFactory）。
+                    销毁：工厂销毁，遍历map，调用所有bean的destroy方法。
+                prototype: 多例
+
+                  创建：  每次使用时，创建对象。
+                  销毁：  工厂销毁，不会调用bean的destroy方法。
+
+    -->
+   <!-- <bean  id="userService" class="com.itheima.service.impl.UserServiceImpl"></bean>-->
+    <bean scope="singleton"  id="userService2" class="com.itheima.service.impl.UserServiceImpl2" init-method="init" destroy-method="destroy"></bean>
+</beans>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+    <bean id="userDao" class="com.itheima.dao.UserDaoImpl"></bean>
+
+
+    <!-- 构造方式进行依赖注入 -->
+    <bean id="userService" class="com.itheima.service.UserServiceImpl">
+        <!--
+            用来确定属性的：
+                name: 通过属性名来确定属性(最常用)
+                type:通过属性的类型来确定属性
+                index:通过索引来确定属性
+            用来赋值的
+                value：基本类型的赋值
+                ref:引用类型的赋值
+
+        -->
+        <!-- name来确定属性  -->
+      <!-- <constructor-arg name="username" value="蔡斌" ></constructor-arg>
+       <constructor-arg name="age" value="18" ></constructor-arg>
+       <constructor-arg name="game" value="植物大战僵尸" ></constructor-arg>
+       <constructor-arg name="userDao" ref="userDao" ></constructor-arg>-->
+
+        <!-- index来确定属性-->
+        <!--<constructor-arg index="0" value="蔡斌" ></constructor-arg>-->
+        <!--<constructor-arg index="1" value="18" ></constructor-arg>-->
+        <!--<constructor-arg index="2" value="植物大战僵尸" ></constructor-arg>-->
+        <!--<constructor-arg index="3" ref="userDao" ></constructor-arg>-->
+
+        <!-- type来确定属性-->
+        <constructor-arg type="java.lang.String" value="植物大战僵尸" ></constructor-arg>
+        <constructor-arg type="java.lang.String" value="蔡斌" ></constructor-arg>
+        <constructor-arg type="int" value="18" ></constructor-arg>
+        <constructor-arg type="com.itheima.dao.UserDaoImpl" ref="userDao" ></constructor-arg>
+
+    </bean>
+
+
+    <!-- set方法进行依赖注入-->
+    <bean id="userService2" class="com.itheima.service.UserServiceImpl2">
+        <!--
+            name:set方法的的名字
+
+                将name的值进行首字母大写，然后前面拼接set关键字，然后作为方法名，获取方法，调用方法，进行依赖注入
+                username -> Username ->setUsername -> 调用方法
+        -->
+        <property name="username" value="林超"></property>
+        <property name="game" value="lol"></property>
+        <property name="age" value="20"></property>
+        <property name="userDao" ref="userDao"></property>
+        <property name="aaa" value="123"></property>
+    </bean>
+
+
+    <!-- 构造方式的简写：c名称空间  -->
+    <bean id="userService3" class="com.itheima.service.UserServiceImpl"
+          c:age="18" c:game="吃鸡" c:username="zhangsan" c:userDao-ref="userDao"></bean>
+
+    <!-- set方式的简写：p名称空间-->
+    <bean id="userService4" class="com.itheima.service.UserServiceImpl2"
+        p:age="18" p:userDao-ref="userDao" p:game="吃鸡" p:username="lisi"></bean>
+
+
+    <!-- 复杂类型的依赖注入-->
+    <bean id="userService5" class="com.itheima.service.UserServiceImpl3">
+        <property name="names">
+            <list>
+                <value>张三</value>
+                <value>李四</value>
+                <value>王五</value>
+            </list>
+        </property>
+
+        <property name="gameNames">
+            <set>
+                <value>吃鸡</value>
+                <value>王者</value>
+                <value>斗地主</value>
+            </set>
+        </property>
+
+        <property name="maps">
+            <map>
+                <entry key="key1" value="value1"></entry>
+                <entry key="key2" value="value2"></entry>
+            </map>
+        </property>
+    </bean>
+</beans>
