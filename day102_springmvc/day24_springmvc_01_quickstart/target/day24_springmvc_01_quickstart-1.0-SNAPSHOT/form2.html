@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+
+    前端路径写法：
+    1.全路径       http://localhost:8080/虚拟项目名/param/basicParam
+    2.全路径的简写   省略http://localhost:8080        /虚拟项目名/param/basicParam
+    3.相对路径   相对于当前访问的资源的路径
+
+            当前访问的资源路径：http://localhost:8080/虚拟项目名/form.html
+            将要访问的资源路径：http://localhost:8080/虚拟项目名/param/basicParam
+
+
+-->
+<form action="param/complexPojoParam" method="post">
+    <table>
+        <tr>
+            <th>客户编号</th>
+            <td><input name="custId"></td>
+        </tr>
+        <tr>
+            <th>客户名称</th>
+            <td><input name="custName"></td>
+        </tr>
+        <tr>
+            <th>信息来源</th>
+            <td><input name="custSource"></td>
+        </tr>
+        <tr>
+            <th>所属行业</th>
+            <td><input name="custIndustry"></td>
+        </tr>
+        <tr>
+            <th>客户级别</th>
+            <td><input name="custLevel"></td>
+        </tr>
+        <tr>
+            <th>联系地址</th>
+            <td><input name="custAddress"></td>
+        </tr>
+        <tr>
+            <th>联系电话</th>
+            <td><input name="custPhone"></td>
+        </tr>
+        <tr>
+            <th>创建时间</th>
+            <td><input name="createrTime"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="提交"/>
+            </td>
+        </tr>
+
+    </table>
+    <table >
+        <tr>
+            <th>毕业学校</th>
+            <!--<%&#45;&#45;传递对象内对象属性时：对象属性名.对象属性&#45;&#45;%>-->
+            <td><input name="customerInfo.school"></td>
+        </tr>
+        <tr>
+            <th>学历</th>
+            <td><input name="customerInfo.level"></td>
+        </tr>
+
+    </table>
+</form>
+</body>
+</html>

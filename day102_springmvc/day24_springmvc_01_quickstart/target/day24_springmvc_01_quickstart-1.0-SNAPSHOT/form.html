@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+    绝对路径   http://localhost:8080/虚拟项目名/param/basicParam
+    绝对路径简写方法  可以省略协议，ip，端口    /虚拟项目名/param/basicParam
+
+    相对路径： 要访问的资源相对路当前操作资源的路径
+        当前操作的资源的路径  http://localhost:8080/虚拟项目名/form.html
+        要访问的资源的路径    http://localhost:8080/虚拟项目名/param/basicParam
+-->
+<form action="param/pojoParam" method="post">
+    <table>
+        <tr>
+            <th>客户编号</th>
+            <td><input name="custId"></td>
+        </tr>
+        <tr>
+            <th>客户名称</th>
+            <td><input name="custName"></td>
+        </tr>
+        <tr>
+            <th>信息来源</th>
+            <td><input name="custSource"></td>
+        </tr>
+        <tr>
+            <th>所属行业</th>
+            <td><input name="custIndustry"></td>
+        </tr>
+        <tr>
+            <th>客户级别</th>
+            <td><input name="custLevel"></td>
+        </tr>
+        <tr>
+            <th>联系地址</th>
+            <td><input name="custAddress"></td>
+        </tr>
+        <tr>
+            <th>联系电话</th>
+            <td><input name="custPhone"></td>
+        </tr>
+        <tr>
+            <th>创建时间</th>
+            <td><input name="createrTime" ></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="提交"/>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

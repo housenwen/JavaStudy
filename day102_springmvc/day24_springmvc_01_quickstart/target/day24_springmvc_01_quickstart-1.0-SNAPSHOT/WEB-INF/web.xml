@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    
+    
+    
+    <!-- 前端控制器-->
+    <servlet>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- 配置springmvc的配置文件的位置-->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:springMVC.xml</param-value>
+        </init-param>
+        <!-- 启动时加载-->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <!--
+            servlet的路径的配置方式。
+            1. 全路径  /demoServlet
+            2. 统配符  /*
+            3. 扩展名  *.do
+            4. 缺省的servlet  /
+                当一个请求找不到与之对应的servlet的时候，这个请求就会交给缺省的servlet来处理。
+
+            dispatcherServlet的作用： 接受浏览器的请求，派发给指定的handler处理。
+                所以，  dispatcherServlet需要接收很多请求。
+
+
+
+            结论：dispatcherServlet的配置只有2种方式
+                1.扩展名匹配  例如  *.do
+                2.缺省的servlet配置，但是需要配置静态资源的释放。
+                        <mvc:default-servlet-handler></mvc:default-servlet-handler>
+
+
+        -->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+    <!-- spring的乱码过滤器-->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <!-- 编码格式-->
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+</web-app>
