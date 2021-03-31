@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+      ">
+
+    <!-- bean definitions here -->
+
+    <bean id="userService" class="com.itheima.service.impl.UserServiceImpl"></bean>
+
+    <!-- aop配置
+
+        在1切面中  配置 2增强和  3切入点的  4关系
+      -->
+
+    <!-- 创建增强类所在的对象-->
+    <bean id="logUtil" class="com.itheima.utils.LogUtils"></bean>
+
+    <!-- 声明开始aop的配置-->
+    <aop:config>
+        <!-- 声明切面
+             ref:指向增强所在的对象
+        -->
+       <aop:aspect ref="logUtil">
+           <!--
+                切入点表达式：
+                    语法    修饰符  返回值  包名.类名.方法名(参数)
+
+                    1.修饰可以省略
+                         void com.itheima.service.impl.UserServiceImpl.login()
+
+                    2. *代表任意返回值
+                        * com.itheima.service.impl.UserServiceImpl.login()
+
+
+                    3.*可以代表任意包名，但是注意.一个包需要一个*
+                       * *.*.*.*.UserServiceImpl.login()
+
+                    4. *..代表任意多级包
+                         * *..UserServiceImpl.login()
+
+                    5. *可以代表任意类名
+                        * *..*.login()
+
+                    6. *代表任意方法名
+                        * *..*.*()
+
+
+                    7. *代表任意参数，一个参数必须有一个*
+                        * com.itheima.service.impl.*.*(*)
+
+                    8. ..代表任意多个参数
+                        * com.itheima.service.impl.*.*(..)
+
+
+                    企业开发，常用aspectj表达式：
+                    * com.itheima.service.impl.*.*(..)
+
+                    aspectj表达式支持||运算
+                     表达式||表达式
+
+
+               通知类型：
+               before: 前置通知，增强在切入点之前执行。
+               after-returning: 后置通知，增强在切入点之后执行。如果切入点报错，不会执行。
+               after-throwing:异常通知，增强在出现异常的时候执行。
+               after: 最终通知，无论是否出现异常，增强都会在切入点之后执行。
+               around: 环绕通知，自定义增强的位置。
+
+           -->
+<!--
+           <aop:before method="printLog" pointcut="execution(* com.itheima.service.impl.*.*(..))"></aop:before>
+-->
+<!--
+           <aop:after-returning method="printLog" pointcut="execution(* com.itheima.service.impl.*.*(..))"></aop:after-returning>
+-->
+<!--
+           <aop:after-throwing method="printLog" pointcut="execution(* com.itheima.service.impl.*.*(..))"></aop:after-throwing>
+-->
+
+<!--
+           <aop:after method="printLog" pointcut="execution(* com.itheima.service.impl.*.*(..))"></aop:after>
+-->
+           <aop:pointcut id="pt1" expression="execution(* com.itheima.service.impl.*.*(..))"></aop:pointcut>
+           <aop:around method="printLog2" pointcut-ref="pt1"></aop:around>
+       </aop:aspect>
+    </aop:config>
+</beans>

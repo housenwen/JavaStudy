@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- bean definitions here -->
+
+    <!-- 引入外部配置-->
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+    <!-- service对象-->
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"></property>
+    </bean>
+
+    <!--dao对象-->
+    <bean id="accountDao" class="com.itheima.dao.impl.AccountDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+
+    <!--jdbcTemplate-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!--数据源-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClass}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="username" value="${jdbc.username}"></property>
+    </bean>
+
+
+    <!--
+
+            spring的事务配置： 底层就是aop
+
+            如何进行aop配置： 在1切面中配置2.增强和3.切入点的4.关系。
+
+
+            1.创建事务增强所在的对象，即事务管理器对象。依赖注入数据源
+            2.配置增强和切入点的关系，因为事务的增强和关系都是固定的，所以此处的事务aop，spring已经做了简化
+
+
+    -->
+    <!--
+        配置事务管理器对象：增强所在的对象。
+            id="transactionManager"  ，唯一标识就叫做transactionManager
+    -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!-- 配置事务的策略
+        id:策略的唯一标识
+        transaction-manager：事务管理器对象的唯一标识
+    -->
+    <tx:advice id="ad1" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- 事务的策略配置-->
+            <tx:method name="*"></tx:method>
+            <!--<tx:method name="query*" timeout="-1" isolation="DEFAULT" read-only="true" propagation="SUPPORTS"/>
+            <tx:method name="update*" timeout="-1" isolation="DEFAULT" read-only="false" propagation="REQUIRED"/>
+            <tx:method name="delete*" timeout="-1" isolation="DEFAULT" read-only="false" propagation="REQUIRED"/>
+            <tx:method name="save*" timeout="-1" isolation="DEFAULT" read-only="false" propagation="REQUIRED"/>-->
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 事务的aop-->
+    <aop:config>
+        <aop:advisor advice-ref="ad1" pointcut="execution(* com.itheima.service.impl.*.*(..))"></aop:advisor>
+    </aop:config>
+</beans>
