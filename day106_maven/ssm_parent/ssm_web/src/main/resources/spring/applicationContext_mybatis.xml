@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- bean definitions here -->
+
+    <!--导入外部配置-->
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+
+    <!-- 数据库连接池 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="driverClassName" value="${jdbc.driverClass}"></property>
+    </bean>
+
+    <!--sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--配置数据源-->
+        <property name="dataSource" ref="dataSource"></property>
+        <!--mybatis的配置文件,此处的配置和下面的configuration配置冲突-->
+        <!--
+                <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+        -->
+        <!-- 别名映射-->
+        <property name="typeAliasesPackage" value="com.itheima.pojo"></property>
+        <!-- 映射文件 -->
+        <property name="mapperLocations" value="classpath:mappers/*.xml"></property>
+        <!-- 配置setting中的配置-->
+        <property name="configuration">
+            <bean class="org.apache.ibatis.session.Configuration">
+                <property name="mapUnderscoreToCamelCase" value="true"></property>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- 创建单个mapper对象-->
+    <!-- dao对象-->
+    <!--
+        <bean id="customerDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+            &lt;!&ndash; 依赖注入sqlSessionFactory&ndash;&gt;
+            <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+            &lt;!&ndash;依赖注入 接口类型&ndash;&gt;
+            <property name="mapperInterface" value="com.itheima.dao.CustomerDao"></property>
+        </bean>-->
+
+
+    <!-- 包扫描的方式创建-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.itheima.dao" />
+        <!-- optional unless there are multiple session factories defined -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+
+</beans>

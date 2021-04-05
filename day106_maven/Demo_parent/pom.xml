@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.itcast</groupId>
+    <artifactId>Demo_parent</artifactId>
+    <!-- 父工程的打包方式必须是pom -->
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <!-- 声明了子模块  -->
+    <modules>
+        <module>Demo_child_A</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- 统一声明依赖的版本号
+            1. <依赖名.version>版本号</依赖名.version>
+            2.在坐标中通过${依赖名.version}引入版本号
+        -->
+        <mysql.version>5.1.38</mysql.version>
+        <junit.version>4.12</junit.version>
+        <mybatis.version>3.4.6</mybatis.version>
+    </properties>
+    <dependencies>
+
+        <!--
+            继承在企业开发中的真正运用。
+            1.针对于所有子工程需要的依赖，我们在父工程中的<dependencies>中引入
+            2.非所有子工程的依赖，我们在<dependenciesManagement>中引入。子工程需要，再实际引入即可，但是不需要不配置版本号。
+                <dependenciesManagement>：只是声明依赖的版本，不会真的引入标签。
+            3.所有依赖的版本号，全部配置在<properties>中，用于统一管理依赖的版本
+            4.插件的用法和依赖的用法一致。
+
+
+            需求：
+            1.junit是所有子工程需要的依赖
+            2.mybatis只是其中一个dao层模块需要的依赖。
+
+        -->
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+        <!-- 所有的子工程都会引入此依赖-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <!-- 只是声明了依赖的版本，并不会真的去引入标签 ，只是声明依赖的版本。方便依赖版本的统一管理。-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <plugins>
+            <!-- java编译插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <!-- tomcat7插件,命令： mvn tomcat7:run -DskipTests -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <uriEncoding>utf-8</uriEncoding>
+                    <port>8080</port>
+                    <path>/</path>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+</project>

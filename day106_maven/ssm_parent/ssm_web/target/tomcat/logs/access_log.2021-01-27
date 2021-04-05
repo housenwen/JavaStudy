@@ -1,0 +1,3 @@
+127.0.0.1 - - [27/Jan/2021:16:33:14 +0800] "GET / HTTP/1.1" 404 951 http-bio-8080-exec-1 111
+127.0.0.1 - - [27/Jan/2021:16:33:14 +0800] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8080-exec-2 3
+127.0.0.1 - - [27/Jan/2021:16:33:21 +0800] "GET /customer/findAll HTTP/1.1" 200 3901 http-bio-8080-exec-3 1678
