@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="day08_ssm_01_xml:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="day08_ssm_02_annotation-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="day08_ssm_01_xml:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,1 @@
+127.0.0.1 - - [26/Jan/2021:16:44:31 +0800] "GET /customer/findAll HTTP/1.1" 200 3901 http-bio-8080-exec-1 1192

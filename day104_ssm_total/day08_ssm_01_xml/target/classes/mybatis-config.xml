@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 引入外部配置-->
+    <!--<properties resource="jdbc.properties"></properties>-->
+
+    <!--&lt;!&ndash; 驼峰映射&ndash;&gt;-->
+    <!--<settings>-->
+        <!--<setting name="mapUnderscoreToCamelCase" value="true"/>-->
+    <!--</settings>-->
+
+    <!--&lt;!&ndash;别名映射&ndash;&gt;-->
+    <!--<typeAliases>-->
+        <!--<package name="com.itheima.pojo"></package>-->
+    <!--</typeAliases>-->
+
+    <!--<mappers>-->
+        <!--<package name="com.itheima.dao"></package>-->
+    <!--</mappers>-->
+
+    <!-- 数据源交给spring管理了  -->
+    <!--<environments default="development">-->
+        <!--<environment id="development">-->
+            <!--<transactionManager type="JDBC"/>-->
+            <!--<dataSource type="POOLED">-->
+                <!--<property name="driver" value="${jdbc.driverClass}"/>-->
+                <!--<property name="url" value="${jdbc.url}"/>-->
+                <!--<property name="username" value="${jdbc.username}"/>-->
+                <!--<property name="password" value="${jdbc.password}"/>-->
+            <!--</dataSource>-->
+        <!--</environment>-->
+    <!--</environments>-->
+
+
+</configuration>
