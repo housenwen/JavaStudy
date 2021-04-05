@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- bean definitions here -->
+
+    <!--注解扫描-->
+    <context:component-scan base-package="com.itheima.controller"></context:component-scan>
+
+    <!-- 注解驱动-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+
+    <!-- 视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!-- 释放静态资源-->
+    <mvc:default-servlet-handler></mvc:default-servlet-handler>
+
+
+    <!-- 文件解析器
+        id必须叫做multipartResolver
+    -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 限制上传文件的大小，单位是字节 ，差不多10m-->
+        <property name="maxUploadSize" value="10240000"></property>
+        <!-- 文件名的中文乱码问题 -->
+        <property name="defaultEncoding" value="utf-8"></property>
+    </bean>
+
+
+    <!--&lt;!&ndash; 创建异常处理器对象 &ndash;&gt;-->
+    <!--<bean class="com.itheima.exceptionHandler.MyExceptionHandler"></bean>-->
+
+
+    <!-- 配置拦截器-->
+    <mvc:interceptors>
+        <!-- 配置单个拦截器-->
+        <mvc:interceptor>
+            <!-- 配置拦截路径，*通配所有-->
+            <mvc:mapping path="/interceptor/*"/>
+            <!-- 拦截器对象-->
+            <bean class="com.itheima.interceptor.MyInterceptor1"></bean>
+        </mvc:interceptor>
+
+        <!-- 配置单个拦截器-->
+        <mvc:interceptor>
+            <!-- 配置拦截路径，*通配所有-->
+            <mvc:mapping path="/interceptor/*"/>
+            <!-- 拦截器对象-->
+            <bean class="com.itheima.interceptor.MyInterceptor2"></bean>
+        </mvc:interceptor>
+
+        <!-- 配置单个拦截器-->
+        <mvc:interceptor>
+            <!-- 配置拦截路径，*通配所有-->
+            <mvc:mapping path="/interceptor/*"/>
+            <!-- 拦截器对象-->
+            <bean class="com.itheima.interceptor.MyInterceptor3"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>

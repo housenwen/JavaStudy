@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--
+        文件上传的3要素
+        1.文件上传需要使用文件上传组件<input type='file'>
+        2.文件上传的数据格式必须是 multipart/form-data ，因为文件必须是字节形式传输
+        3.必须是post请求上传文件，因为get请求由提交内容大小的限制
+    -->
+    <form action="file/uploadFile" method="post" enctype="multipart/form-data">
+        用户名：<input type="text" name="username"><br>
+        密码：<input type="password" name="password"><br>
+        <input type="file" name="file"><br>
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>
