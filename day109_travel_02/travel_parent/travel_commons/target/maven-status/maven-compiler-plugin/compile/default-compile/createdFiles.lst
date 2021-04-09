@@ -1,0 +1,4 @@
+com\itheima\travel\plugin\ToStringPlugin.class
+com\itheima\travel\plugin\CommentGenerator.class
+com\itheima\travel\plugin\LombokPlugin.class
+com\itheima\travel\plugin\LombokPlugin$Annotations.class

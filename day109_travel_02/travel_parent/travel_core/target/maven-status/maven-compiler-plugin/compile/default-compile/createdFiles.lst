@@ -1,0 +1,4 @@
+com\itheima\travel\config\ProjectInitConfig.class
+com\itheima\travel\config\SpringMvcConfig.class
+com\itheima\travel\config\SpringConfig.class
+com\itheima\travel\config\MyBatisConfig.class
