@@ -1,0 +1,6 @@
+127.0.0.1 - - [02/Feb/2021:16:26:06 +0800] "GET /category/findAllCategory HTTP/1.1" 200 620 http-bio-8080-exec-2 761
+127.0.0.1 - - [02/Feb/2021:16:27:59 +0800] "GET /swagger-resources/configuration/ui HTTP/1.1" 200 491 http-bio-8080-exec-1 190
+127.0.0.1 - - [02/Feb/2021:16:27:59 +0800] "GET /swagger-resources/configuration/security HTTP/1.1" 200 12 http-bio-8080-exec-3 9
+127.0.0.1 - - [02/Feb/2021:16:27:59 +0800] "GET /swagger-resources HTTP/1.1" 200 101 http-bio-8080-exec-4 4
+127.0.0.1 - - [02/Feb/2021:16:27:59 +0800] "GET /v2/api-docs HTTP/1.1" 200 22381 http-bio-8080-exec-5 195
+127.0.0.1 - - [02/Feb/2021:16:28:04 +0800] "GET /category/findAllCategory HTTP/1.1" 200 620 http-bio-8080-exec-6 142

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+   mapper标签:配置各类声明
+   namespace：名称空间，由于映射文件可能有多个，为了防止crud语句的唯一标识被重复，需要设置空间名称。
+ -->
+
+<mapper namespace="UserMapper">
+    <!--
+        select:查询的statement（声明），用来编写查询语句
+        id:语句的唯一标识
+        resultType：配置返回的结果集类型
+        parameterType：传递的参数类型，可以省略
+    -->
+
+    <select id="queryUserById" resultType="User">
+        select * from tb_user where id = #{id}
+    </select>
+
+    <resultMap id="" type="">
+        <!-- 定义主键映射-->
+        <id></id>
+        <!-- 其他列的映射 -->
+        <result property="" column=""></result>
+    </resultMap>
+</mapper>

@@ -1,0 +1,6 @@
+com\itheima\travel\config\SpringMvcConfig.class
+com\itheima\travel\interceptors\PrimaryKeyInterceptor.class
+com\itheima\travel\config\SnowflakeIdWorker.class
+com\itheima\travel\config\SpringConfig.class
+com\itheima\travel\config\MyBatisConfig.class
+com\itheima\travel\config\RedissonConfig.class
