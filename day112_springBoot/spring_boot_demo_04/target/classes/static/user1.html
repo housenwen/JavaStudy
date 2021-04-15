@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" rel="stylesheet" href="css/user.css"/>
+    <script src="js/vue.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/axios-0.18.0.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<div id="app">
+    <el-table
+            :data="tableData"
+            style="width: 100%">
+        <el-table-column
+                label="用户编号"
+                width="180">
+            <template slot-scope="scope">
+                <span style="margin-left: 10px">{{ scope.row.id }}</span>
+            </template>
+        </el-table-column>
+
+        <el-table-column
+                label="用户姓名"
+                width="180">
+            <template slot-scope="scope">
+                <span style="margin-left: 10px">{{ scope.row.name }}</span>
+            </template>
+        </el-table-column>
+
+        <el-table-column
+                label="用户密码"
+                width="180">
+            <template slot-scope="scope">
+                <span style="margin-left: 10px">{{ scope.row.password }}</span>
+            </template>
+        </el-table-column>
+
+        <el-table-column
+                label="用户生日"
+                width="180">
+            <template slot-scope="scope">
+                <span style="margin-left: 10px">{{ scope.row.birthday }}</span>
+            </template>
+        </el-table-column>
+
+
+        <el-table-column label="操作">
+            <template slot-scope="scope">
+                <el-button
+                        size="mini"
+                        @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                <el-button
+                        size="mini"
+                        type="danger"
+                        @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+  <div align="left">
+      <el-pagination
+              background
+              layout="prev, pager, next"
+              :total="1000">
+      </el-pagination>
+
+      <el-dialog
+              title="提示"
+              :visible.sync="dialogVisible"
+              width="60%"
+              height="60%"
+              :before-close="handleClose">
+
+          <el-form :model="formData"  label-width="100px" class="demo-ruleForm">
+              <el-form-item label="用户名">
+                  <el-input type="text" v-model="formData.userName"></el-input>
+              </el-form-item>
+
+              <el-form-item label="年龄">
+                  <el-input v-model.number="formData.age"></el-input>
+              </el-form-item>
+              <el-form-item>
+                  <el-button type="primary" @click="submitForm()">提交</el-button>
+                  <el-button @click="resetForm()">重置</el-button>
+              </el-form-item>
+          </el-form>
+      </el-dialog>
+
+  </div>
+
+</div>
+</body>
+<script>
+    //   创建vue对象    el   data  created  methods
+    //  js  声明对象  {key:value}  Object    mvvm
+    var  vue = new Vue({
+        el:"#app",  //  挂载 标签组件
+        data:{        //  数据模型
+            tableData:[],
+            dialogVisible:false,
+            formData:{
+                userName:"",
+                age:""
+            }  //  用户表单数据
+        },
+        created(){  //  vue 生命周期8个
+            //  ajax  查询 后台
+             this.findAll();
+        },
+        methods: {
+
+            handleClose(){},
+         //  表单提交   .vue     npm  run build --index.html(xxx.js)
+            submitForm(){
+                // @RequestBody User user
+                axios.post("user/register",this.formData).then((res)=>{
+                    if(res.data.flag){
+                        this.$message.success("恭喜 注册成功")
+                    }else{
+                        this.$message.error("可惜 注册失败")
+                    }
+                    this.dialogVisible = false
+                })
+            },
+            // 重置
+            resetForm(){
+                this.formData = {}
+            },
+
+            findAll(){
+                axios.get("user/findAll").then((res)=>{
+                    console.info(res)
+                    //  this vue对象    res.data   后台响应的数据内容
+                    this.tableData = res.data
+                })
+            },
+
+            handleEdit(index, row) {
+             // 弹窗    form表单
+                this.dialogVisible = true
+            },
+            handleDelete(index, row) {
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                   //   发送ajax请求 后台 删除记录 删除成功  弹窗
+                    axios.delete("user/deleteUserById/"+row.id).then((res)=>{
+                        //  res.data  = Result
+                        if(res.data.flag){
+                            this.$message({
+                                type: 'success',
+                                message: '删除成功!'
+                            });
+                            //  更新数据
+                            this.findAll();
+
+                        }else{
+                            this.$message({
+                                type: 'error',
+                                message: '删除失败!'
+                            });
+                        }
+                    })
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+            }
+        }
+
+
+    })
+
+
+
+</script>
+
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="js/vue.js"></script>
+<script src="js/axios-0.18.0.js"></script>
+<script src="js/index.js"></script>
+<body>
+
+<div id="app">
+
+    <table class="altrowstable" id="alternatecolor">
+        <tr>
+            <td>用户编号</td>
+            <td>用户姓名</td>
+            <td>用户密码</td>
+            <td>用户性别</td>
+            <td>用户年纪</td>
+            <td>用户生日</td>
+        </tr>
+        <!--使用指令  v-for 遍历数据模型 users数据-->
+        <tr v-for="user in users">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.password}}</td>
+            <td>{{user.sex==1?'帅':'美'}}</td>
+            <td>{{user.age}}</td>
+            <td>{{user.birthday}}</td>
+        </tr>
+    </table>
+
+</div>
+</body>
+<script>
+    var  vue = new Vue({
+        el:"#app",
+        //    数据模型
+        data:{
+            users:[]   //  定义一个 数组 接收后台  json 数据 [{},{},{}]
+        },
+        created(){
+            //   vue初始化     函数会自动调用
+            //   页面加载时 立刻发送ajax  访问后台  获取用户数据
+            axios.get("findAll").then((res)=>{
+                this.users = res.data  //   后台 数据  赋值  数据模型   users
+            })
+        }
+    })
+</script>
+</html>

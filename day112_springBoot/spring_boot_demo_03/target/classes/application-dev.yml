@@ -1,0 +1,14 @@
+jdbc:
+  username: xiaogang
+  password: 1234
+  map:
+    key1: value1
+    key2: value2
+  dog:
+    name: 泰日天
+    type: 泰迪
+    sex: 公的
+  girls:
+    - 关晓彤
+    - 柳岩
+    - 杨幂

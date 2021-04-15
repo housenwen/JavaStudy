@@ -1,0 +1,52 @@
+{
+  "groups": [
+    {
+      "name": "jdbc",
+      "type": "com.itheima.config.JdbcProperties3",
+      "sourceType": "com.itheima.config.JdbcProperties3"
+    },
+    {
+      "name": "jdbc",
+      "type": "com.itheima.config.JdbcProperties2",
+      "sourceType": "com.itheima.config.JdbcProperties2"
+    }
+  ],
+  "properties": [
+    {
+      "name": "jdbc.dog",
+      "type": "com.itheima.config.Dog",
+      "sourceType": "com.itheima.config.JdbcProperties3"
+    },
+    {
+      "name": "jdbc.girls",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.itheima.config.JdbcProperties3"
+    },
+    {
+      "name": "jdbc.map",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "sourceType": "com.itheima.config.JdbcProperties3"
+    },
+    {
+      "name": "jdbc.password",
+      "type": "java.lang.String",
+      "sourceType": "com.itheima.config.JdbcProperties3"
+    },
+    {
+      "name": "jdbc.password",
+      "type": "java.lang.String",
+      "sourceType": "com.itheima.config.JdbcProperties2"
+    },
+    {
+      "name": "jdbc.username",
+      "type": "java.lang.String",
+      "sourceType": "com.itheima.config.JdbcProperties3"
+    },
+    {
+      "name": "jdbc.username",
+      "type": "java.lang.String",
+      "sourceType": "com.itheima.config.JdbcProperties2"
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,13 @@
+jdbc:
+  username: xiaogang
+  password: 1234
+  map:
+    key1: value1
+    key2: value2
+  dog:
+    name: 泰日地
+    type: 泰迪
+    sex: 母的
+  girls:
+    - 大幂幂
+    - 邓紫棋

@@ -1,0 +1,32 @@
+server:
+  port: 8081  # 修改 服务tomcat默认端口号
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB    # 后续重新设置上传文件大小
+      max-request-size: 10MB
+  mvc:
+    servlet:
+      path: /    # 修改DispatcherServlet映射路径
+      load-on-startup: 1   # 修改Servlet随tomcat一起初始化
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/itheima121?characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+logging:
+  level:
+    com.itheima: debug      # 日志级别 debug
+
+
+#mybatis-plus
+mybatis-plus:
+  type-aliases-package: com.itheima.pojo   # 实体的别名包扫描
+  configuration:
+    #   sql日志显示，这里使用标准显示
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #  数据库中如果有类似 如  user_name 等命名，会将 _后的字母大写，这里是为了和实体类对应
+    map-underscore-to-camel-case: true
