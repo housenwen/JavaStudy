@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="headerDiv">
+<!-- 头部 start -->
+<header id="header">
+    <div class="top_banner">
+        <img src="images/top_banner.jpg" alt="">
+    </div>
+    <div class="shortcut">
+        <!-- 未登录状态  -->
+        <div class="login_out" v-if="!isLogin">
+            <a href="login.html">登录</a>
+            <a href="register.html">注册</a>
+        </div>
+        <!-- 登录状态  -->
+        <div class="login" v-if="isLogin">
+            <span>欢迎回来，{{loginUser.username}}</span>
+            <a href="myfavorite.html" class="collection">我的收藏</a>
+            <a href="#" @click="_logOut()">退出</a>
+        </div>
+    </div>
+    <div class="header_wrap">
+        <div class="topbar">
+            <div class="logo">
+                <a href="/"><img src="images/logo.jpg" alt=""></a>
+            </div>
+            <div class="search">
+                <input name="rname" id="rname" type="text" placeholder="请输入路线名称" class="search_input" autocomplete="off">
+                <a href="javascript:searchRoute();" class="search-button">搜索</a>
+            </div>
+            <div class="hottel">
+                <div class="hot_pic">
+                    <img src="images/hot_tel.jpg" alt="">
+                </div>
+                <div class="hot_tel">
+                    <p class="hot_time">客服热线(9:00-6:00)</p>
+                    <p class="hot_num">400-618-9090</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- 头部 end -->
+<!-- 首页导航 -->
+<div class="navitem">
+    <ul class="nav">
+        <li class="nav-active"><a href="index.html">首页</a></li>
+
+        <li v-for="category in categoryList"><a href="route_list.html" v-html="category.categoryName" ></a></li>
+
+        <li><a href="favoriterank.html">收藏排行榜</a></li>
+    </ul>
+</div>
+</div>
+<script src="js/vue.js"></script>
+<script src="element-ui/index.js"></script>
+<script src="vue/axios.min.js"></script>
+<script src="vue/js-cookie.js"></script>
+<script type="module">
+
+    import  {findAllCategory} from "./vue/category.js";
+    import {isLogin,currentSubject,logout} from "./vue/user.js";
+
+    new Vue({
+        el:"#headerDiv", //vue的视图作用范围
+        data:{
+            categoryList:[],   //接受所有类别信息
+            isLogin:false,   //是否登录的标识
+            loginUser:{}   //当前登录的用户信息
+        },
+        methods:{
+            _findAllCategory(){
+                //ajax请求获取所有的类别信息
+                findAllCategory().then(response=>{
+                    //此处的response是响应体
+                    /*
+                        response {
+                            code:
+                            msg:
+                            operationTime:
+                            data:
+                            webSite:
+                        }
+                     */
+                    this.categoryList = response.data;
+                })
+            },
+
+            //是否登录
+            _isLogin(){
+                isLogin().then(response=>{
+                    this.isLogin = response.data;
+                })
+            },
+
+            //获取当前登录的用户
+            _getCurrentUser(){
+                currentSubject().then(response=>{
+                    if(response.data!=null){
+                        //获取登录的用户信息
+                        this.loginUser = response.data;
+                    }
+                });
+            },
+
+            //退出
+            _logOut(){
+                logout().then(response=>{
+                    if(response.data){
+                        //重新刷新页面
+                        location.reload();
+                    }
+                })
+            }
+        },
+        created:function () {
+            //页面加载完成，获取所有类别信息
+            this._findAllCategory();
+            this._isLogin();
+            this._getCurrentUser();
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+com\itheima\travel\controller\DemoController.class
+com\itheima\travel\controller\BasicController.class
+com\itheima\travel\interceptors\CrossInterceptor.class
+com\itheima\travel\controller\RouteController.class
+com\itheima\travel\controller\UserController.class
+com\itheima\travel\interceptors\LoginInterceptor.class
+com\itheima\travel\config\ProjectInitConfig.class
+com\itheima\travel\controller\FavoriteController.class
+com\itheima\travel\config\PlatformSpringMvcConfig.class
+com\itheima\travel\controller\CategoryController.class
+com\itheima\travel\SwaggerConfig.class
