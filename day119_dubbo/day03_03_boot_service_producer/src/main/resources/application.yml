@@ -1,0 +1,12 @@
+
+dubbo:
+  application:
+    name: dubbo_producer
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  protocol:
+    name: dubbo
+    # 在20880基础上加自增
+    port: -1
+server:
+  port: ${port}

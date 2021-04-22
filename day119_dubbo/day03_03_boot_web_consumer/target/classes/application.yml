@@ -1,0 +1,14 @@
+
+# dubbo-consumer.properties
+dubbo:
+  application:
+    name: dubbo_consumer
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  consumer:
+    # 全局配置: 消费者启动时,无需检测生产者是否存在
+    check: false
+    # 远程访问重试次数,默认2次
+    retries: 0
+server:
+  port: 8085
