@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tanhua.manage.mapper.UserInfoMapper">
+
+    <select id="findIndustryDistribution" resultType="com.tanhua.manage.vo.DataPointVo">
+        SELECT tui.industry AS title,count(tui.id) AS amount FROM tb_user_info tui
+        LEFT JOIN tb_user tu ON tui.user_id = tu.id
+        <where>
+            <if test="start !=null and start != ''">
+                AND tu.created &gt;= #{start}
+            </if>
+            <if test="end !=null and end != ''">
+                AND tu.created &lt;= #{end}
+            </if>
+        </where>
+        GROUP BY tui.industry ORDER BY amount DESC LIMIT 10
+    </select>
+
+    <select id="findGenderDistribution" resultType="com.tanhua.manage.vo.DataPointVo">
+        SELECT tui.sex AS title,count(tui.id) AS amount FROM tb_user_info tui
+        LEFT JOIN tb_user tu ON tui.user_id = tu.id
+        <where>
+            <if test="start !=null and start != ''">
+                AND tu.created &gt;= #{start}
+            </if>
+            <if test="end !=null and end != ''">
+                AND tu.created &lt;= #{end}
+            </if>
+        </where>
+        GROUP BY tui.sex ORDER BY amount DESC
+    </select>
+
+    <select id="countByProvince" resultType="java.lang.Long">
+        SELECT count(tui.id) FROM tb_user_info tui LEFT JOIN tb_user tu ON tui.user_id = tu.id
+        <where>
+            tui.city LIKE #{local}
+            <if test="start !=null and start != ''">
+                AND tu.created &gt;= #{start}
+            </if>
+            <if test="end !=null and end != ''">
+                AND tu.created &lt;= #{end}
+            </if>
+        </where>
+    </select>
+
+    <select id="countByAge" resultType="java.lang.Long">
+        SELECT count(tui.id) FROM tb_user_info tui LEFT JOIN tb_user tu ON tui.user_id = tu.id
+        <where>
+            <if test="min !=null">
+                AND tui.age &gt;= #{min}
+            </if>
+            <if test="max !=null">
+                AND tui.age &lt; #{max}
+            </if>
+            <if test="start !=null and start != ''">
+                AND tu.created &gt;= #{start}
+            </if>
+            <if test="end !=null and end != ''">
+                AND tu.created &lt;= #{end}
+            </if>
+        </where>
+    </select>
+
+</mapper>
