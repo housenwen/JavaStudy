@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>heima-leadnews</artifactId>
+        <groupId>com.heima</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>heima-leadnews-services</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>admin-service</module>
+        <module>user-service</module>
+        <module>wemedia-service</module>
+        <module>article-service</module>
+        <module>behavior-service</module>
+        <module>comment-service</module>
+        <module>data-sync-service</module>
+        <module>search-service</module>
+    </modules>
+    <dependencies>
+
+        <!-- kafkfa -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.heima</groupId>
+            <artifactId>autoconfiguration-knife4j</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- 统一异常处理依赖 -->
+        <dependency>
+            <artifactId>autoconfiguration-exception</artifactId>
+            <groupId>com.heima</groupId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <artifactId>heima-leadnews-feign</artifactId>
+            <groupId>com.heima</groupId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.heima</groupId>-->
+<!--            <artifactId>heima-leadnews-model</artifactId>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>com.heima</groupId>
+            <artifactId>heima-leadnews-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.heima</groupId>
+            <artifactId>heima-leadnews-utils</artifactId>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.heima</groupId>-->
+<!--            <artifactId>heima-leadnews-apis</artifactId>-->
+<!--        </dependency>-->
+        <!-- Spring boot starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

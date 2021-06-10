@@ -1,0 +1,18 @@
+server:
+  port: 9006
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+  application:
+    name: leadnews-comment
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+  data:
+    mongodb:
+      host: 192.168.200.130
+      port: 27017
+      database: leadnews-comment
+swagger:
+  group: ${spring.application.name} # api文档分组名

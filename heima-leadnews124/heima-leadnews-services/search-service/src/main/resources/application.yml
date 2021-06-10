@@ -1,0 +1,33 @@
+server:
+  port: 9007
+spring:
+  application:
+    name: leadnews-search
+  kafka:
+    bootstrap-servers: 192.168.200.130:9092
+    consumer:
+      group-id: ${spring.application.name}-kafka-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+  data:
+    mongodb:
+      host: 192.168.200.130
+      port: 27017
+      database: leadnews-comment
+#取消对elastsearch的健康检查
+management:
+  health:
+    elasticsearch:
+      enabled: false
+#自定义elasticsearch连接配置
+elasticsearch:
+  host: 192.168.200.130
+  port: 9200
+swagger:
+  group: ${spring.application.name}

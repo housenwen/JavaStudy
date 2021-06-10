@@ -1,0 +1,56 @@
+server:
+  port: 9004
+spring:
+  application:
+    name: leadnews-wemedia
+  kafka:
+    bootstrap-servers: 192.168.200.130:9092
+    producer:
+      retries: 10
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+    alibaba:
+      seata:
+        tx-service-group: heima_leadnews_tx_group
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.200.130:3306/leadnews_wemedia?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: root
+  servlet:
+    multipart:
+      max-file-size: 20MB
+# 设置Mapper接口所对应的XML文件位置，如果你在Mapper接口中有自定义方法，需要进行该配置
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  # 设置别名包扫描路径，通过该属性可以给包中的类注册别名
+  type-aliases-package: com.heima.model.wemedia
+swagger:
+  group: ${spring.application.name} # api文档分组名
+#OSS配置   file.oss.webSite
+
+file:
+  oss:
+    bucket-name: hmtt124
+    access-key-id: LTAI5tMm2qPNJMYmUqZSprgx
+    access-key-secret: GtEGaP0Cn4nlSQglF2LiK7GPZUEeVi
+    endpoint: oss-cn-shanghai.aliyuncs.com
+    web-site: http://hmtt124.oss-cn-shanghai.aliyuncs.com/
+    proxy-username: aliyun-sdk-java
+    socket-timeout: 10000
+    idle-connection-time: 10000
+    connection-request-timeout: 4000
+    max-connections: 2048
+    max-error-retry: 5
+    white-list: 127.0.0.1
+    connection-timeout: 10000
+    profix: material
+logging:
+  level:
+    com.heima: debug

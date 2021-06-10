@@ -1,0 +1,10 @@
+package com.heima.comment.service;
+
+import com.heima.model.comment.pojo.ApComment;
+
+public interface CommentHotService {
+    /**
+     * 查找热点评论
+     */
+    public void hotCommentExecutor(Long entryId, ApComment apComment);
+}

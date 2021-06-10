@@ -1,0 +1,59 @@
+server:
+  port: 5001
+spring:
+  application:
+    name: leadnews-app-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+    gateway:
+      custom-config:
+        allow-urls: # 配置放行的路径
+          - /login/in
+          - /login/register
+          - /v2/api-docs
+          - /login_auth/
+          - /login_auth
+      globalcors:
+        cors-configurations:
+          '[/**]': # 匹配所有请求
+            allowedOrigins: "*" #跨域处理 允许所有的域
+            allowedMethods: # 支持的方法
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      routes:
+        #文章微服务
+        - id: leadnews-article
+          uri: lb://leadnews-article
+          predicates:
+            - Path=/article/**
+          filters:
+            - StripPrefix= 1
+        - id: leadnews-user
+          uri: lb://leadnews-user
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix= 1
+        #行为微服务
+        - id: leadnews-behavior
+          uri: lb://leadnews-behavior
+          predicates:
+            - Path=/behavior/**
+          filters:
+            - StripPrefix= 1
+        - id: leadnews-comment
+          uri: lb://leadnews-comment
+          predicates:
+            - Path=/comment/**
+          filters:
+            - StripPrefix= 1
+        - id: leadnews-search
+          uri: lb://leadnews-search
+          predicates:
+            - Path=/search/**
+          filters:
+            - StripPrefix= 1

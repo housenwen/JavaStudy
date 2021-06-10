@@ -1,0 +1,69 @@
+server:
+  port: 9003
+spring:
+  application:
+    name: leadnews-article
+  redis:
+    host: 192.168.200.130
+    #    password: 123456
+    port: 6379
+    timeout: 90000
+  kafka:
+    bootstrap-servers: 192.168.200.130:9092
+    consumer:
+      group-id: ${spring.application.name}-kafka-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+    alibaba:
+      seata:
+        tx-service-group: heima_leadnews_tx_group
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.200.130:3306/leadnews_article?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: root
+# 设置Mapper接口所对应的XML文件位置，如果你在Mapper接口中有自定义方法，需要进行该配置
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  # 设置别名包扫描路径，通过该属性可以给包中的类注册别名
+  type-aliases-package: com.heima.model.article.pojo
+  global-config:
+    datacenter-id: 1
+    workerId: 1
+swagger:
+  group: ${spring.application.name} # api文档分组名
+file:
+  oss:
+    bucket-name: hmtt124
+    access-key-id: LTAI5tMm2qPNJMYmUqZSprgx
+    access-key-secret: GtEGaP0Cn4nlSQglF2LiK7GPZUEeVi
+    endpoint: oss-cn-shanghai.aliyuncs.com
+    web-site: http://hmtt124.oss-cn-shanghai.aliyuncs.com/
+    proxy-username: aliyun-sdk-java
+    socket-timeout: 10000
+    idle-connection-time: 10000
+    connection-request-timeout: 4000
+    max-connections: 2048
+    max-error-retry: 5
+    white-list: 127.0.0.1
+    connection-timeout: 10000
+    profix: material
+logging:
+  level:
+    com.heima: info
+xxljob:
+  admin:
+    addresses: http://192.168.200.130:8888/xxl-job-admin
+  executor:
+    appname: leadnews-article-executor
+    port: 9991
+    logPath: D:/xxljob/logs
+kafka:
+  hosts: 192.168.200.130:9092
+  group: ${spring.application.name}

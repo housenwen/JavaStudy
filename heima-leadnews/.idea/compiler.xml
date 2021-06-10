@@ -11,12 +11,12 @@
         <module name="heima-leadnews-admin" />
         <module name="heima-leadnews-apis" />
         <module name="heima-leadnews-wemedia" />
+        <module name="heima-leadnews-article" />
         <module name="heima-leadnews-common" />
-        <module name="heima-leadnews-utils" />
         <module name="heima-leadnews-model" />
         <module name="heima-leadnews-user" />
         <module name="heima-leadnews-admin-gateway" />
-        <module name="heima-leadnews-article" />
+        <module name="heima-leadnews-utils" />
         <module name="heima-leadnews-wemedia-gateway" />
       </profile>
     </annotationProcessing>

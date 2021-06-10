@@ -1,0 +1,44 @@
+server:
+  port: 6001
+spring:
+  application:
+    name: leadnews-admin-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+    gateway:
+      globalcors: # 跨域配置
+        cors-configurations:
+          '[/**]': # 匹配所有请求
+            allowedOrigins: "*" #跨域处理 允许所有的域
+            allowedMethods: # 支持的方法
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      custom-config:
+        allow-urls: # 配置放行的路径
+          - /login/in
+          - /login/register
+          - /v2/api-docs
+      routes:
+        # 平台管理
+        - id: admin
+          uri: lb://leadnews-admin
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix= 1
+        - id: user
+          uri: lb://leadnews-user
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix= 1
+        - id: wemedia
+          uri: lb://leadnews-wemedia
+          predicates:
+            - Path=/wemedia/**
+          filters:
+            - StripPrefix= 1
