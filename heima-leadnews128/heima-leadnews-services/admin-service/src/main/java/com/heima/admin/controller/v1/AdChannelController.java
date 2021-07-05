@@ -4,9 +4,12 @@ import com.heima.admin.service.AdChannelService;
 import com.heima.model.admin.dtos.ChannelDto;
 import com.heima.model.admin.pojos.AdChannel;
 import com.heima.model.common.dtos.ResponseResult;
+import com.heima.model.common.valid.HeimaAdd;
+import com.heima.model.common.valid.HeimaUpdate;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -32,16 +35,14 @@ public class AdChannelController {
     }
     @ApiOperation(value = "保存频道",notes = "关于此方法的详细描述信息")
     @PostMapping("save")
-    public ResponseResult save(@RequestBody AdChannel channel){
+    public ResponseResult save(@RequestBody @Validated(HeimaAdd.class) AdChannel channel){
         return adChannelService.insert(channel);
     }
-
     @ApiOperation(value = "修改频道",notes = "关于此方法的详细描述信息")
     @PostMapping("update")
-    public ResponseResult update(@RequestBody AdChannel channel){
+    public ResponseResult update(@RequestBody @Validated(HeimaUpdate.class) AdChannel channel){
         return adChannelService.update(channel);
     }
-
     @ApiOperation(value = "删除频道",notes = "关于此方法的详细描述信息")
     @GetMapping("del/{id}")
     public ResponseResult delete(@PathVariable Integer id){

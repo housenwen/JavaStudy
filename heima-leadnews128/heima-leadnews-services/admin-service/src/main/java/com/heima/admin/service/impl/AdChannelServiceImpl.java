@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.heima.admin.mapper.AdChannelMapper;
 import com.heima.admin.service.AdChannelService;
+import com.heima.common.exception.CustException;
+import com.heima.common.exception.CustomException;
 import com.heima.model.admin.dtos.ChannelDto;
 import com.heima.model.admin.pojos.AdChannel;
 import com.heima.model.common.dtos.PageResponseResult;
@@ -51,10 +53,10 @@ public class AdChannelServiceImpl extends ServiceImpl<AdChannelMapper, AdChannel
 
     @Override
     public ResponseResult insert(AdChannel channel) {
-        // 1. 校验参数                      isEmpty()
-        if(channel == null || StringUtils.isBlank(channel.getName())){
-            return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID,"频道名称不能为空");
-        }
+//        // 1. 校验参数                      isEmpty()
+//        if(channel == null || StringUtils.isBlank(channel.getName())){
+//            return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID,"频道名称不能为空");
+//        }
         // 2. 根据名称查询数量
         int count = this.count(Wrappers.<AdChannel>lambdaQuery().eq(AdChannel::getName, channel.getName()));
         if(count > 0){
@@ -89,9 +91,12 @@ public class AdChannelServiceImpl extends ServiceImpl<AdChannelMapper, AdChannel
         // 4. 返回响应结果
         return ResponseResult.okResult();
     }
-
+    // 事务
     @Override
     public ResponseResult deleteById(Integer id) {
+//        if(id == 16){
+//            CustException.cust(AppHttpCodeEnum.PARAM_INVALID);
+//        }
         // 1. 检查id
         if(id == null){
             return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
@@ -105,6 +110,8 @@ public class AdChannelServiceImpl extends ServiceImpl<AdChannelMapper, AdChannel
         if(channel.getStatus()){
             return ResponseResult.errorResult(AppHttpCodeEnum.DATA_NOT_ALLOW,"频道有效，不允许删除");
         }
+
+
         // 4. 删除频道
         this.removeById(id);
         return ResponseResult.okResult();

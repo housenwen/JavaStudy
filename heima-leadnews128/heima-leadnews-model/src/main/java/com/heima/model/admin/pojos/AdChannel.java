@@ -4,8 +4,12 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.heima.model.common.valid.HeimaAdd;
+import com.heima.model.common.valid.HeimaUpdate;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,11 +18,13 @@ import java.util.Date;
 public class AdChannel implements Serializable {
     private static final long serialVersionUID = 1L;
     @TableId(value = "id", type = IdType.AUTO)
+    @NotNull(message = "id不能为空!!!",groups = HeimaUpdate.class)
     private Integer id;
     /**
      * 频道名称
      */
     @TableField("name")
+    @NotBlank(message = "频道名称不能为空!!!",groups = HeimaAdd.class)
     private String name;
     /**
      * 频道描述
