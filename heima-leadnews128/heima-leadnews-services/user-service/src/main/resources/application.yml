@@ -7,6 +7,11 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.200.130:8848
+    alibaba:
+      seata:
+        tx-service-group: heima_leadnews_tx_group
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://192.168.200.130:3306/leadnews_user?useUnicode=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC

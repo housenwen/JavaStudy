@@ -13,6 +13,8 @@
     <modules>
         <module>heima-knife4j-spring-boot-starter</module>
         <module>heima-exception-spring-boot-starter</module>
+        <module>heima-seata-spring-boot-starter</module>
+        <module>heima-file-spring-boot-starter</module>
     </modules>
 
 </project>

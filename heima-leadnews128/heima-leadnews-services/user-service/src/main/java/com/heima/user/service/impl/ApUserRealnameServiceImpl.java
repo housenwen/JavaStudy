@@ -21,6 +21,7 @@ import com.heima.user.mapper.ApUserMapper;
 import com.heima.user.mapper.ApUserRealnameMapper;
 import com.heima.user.service.ApUserRealnameService;
 import com.heima.utils.common.IdCardUtils;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,7 +59,9 @@ public class ApUserRealnameServiceImpl extends ServiceImpl<ApUserRealnameMapper,
     ApUserMapper apUserMapper;
 
 
-    @Transactional(rollbackFor = Exception.class)
+//    @Transactional(rollbackFor = Exception.class)
+
+    @GlobalTransactional(rollbackFor = Exception.class,timeoutMills = 60000)
     @Override
     public ResponseResult updateStatusById(AuthDto dto, Short status) {
         // 1. 检查参数  dto (id   status 2 9)
@@ -107,7 +110,7 @@ public class ApUserRealnameServiceImpl extends ServiceImpl<ApUserRealnameMapper,
         }
 
         // 自定义个异常  分布式事务 seata框架
-
+//        int i = 1/0;
         return ResponseResult.okResult();
     }
 

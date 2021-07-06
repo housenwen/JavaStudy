@@ -7,11 +7,19 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.200.130:8848
+    alibaba:
+      seata:
+        tx-service-group: heima_leadnews_tx_group
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://192.168.200.130:3306/leadnews_wemedia?useUnicode=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: root
+  servlet:
+    multipart:
+      max-file-size: 10MB
 # 设置Mapper接口所对应的XML文件位置，如果你在Mapper接口中有自定义方法，需要进行该配置
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
@@ -27,3 +35,20 @@ hystrix:
 ribbon:
   ReadTimeout: 5000   # 读取超时时长
   ConnectTimeout: 2000   # 建立链接的超时时长
+#OSS配置
+file:
+  oss:
+    bucket-name: hmtt128   # 桶 存储空间名称
+    access-key-id: LTAI5tQpuFC6ZMTkUnzCoYHY   # 密钥
+    access-key-secret: rOx9bai1cmEPdrIOpF9aa8OEhTROlz
+    endpoint: oss-cn-shanghai.aliyuncs.com  #地域
+    web-site: https://hmtt128.oss-cn-shanghai.aliyuncs.com/  # 访问前缀
+    proxy-username: aliyun-sdk-java
+    socket-timeout: 10000
+    idle-connection-time: 10000
+    connection-request-timeout: 4000
+    max-connections: 2048
+    max-error-retry: 5
+    white-list: 127.0.0.1
+    connection-timeout: 10000
+    prefix: material   # 文件夹前缀
