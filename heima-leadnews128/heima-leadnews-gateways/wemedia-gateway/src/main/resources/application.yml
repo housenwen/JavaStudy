@@ -25,3 +25,9 @@ spring:
             - Path=/wemedia/**
           filters:
             - StripPrefix= 1
+        - id: admin
+          uri: lb://leadnews-admin
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix= 1

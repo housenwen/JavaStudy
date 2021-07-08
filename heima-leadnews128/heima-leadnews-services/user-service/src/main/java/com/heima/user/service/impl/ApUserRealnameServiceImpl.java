@@ -61,7 +61,7 @@ public class ApUserRealnameServiceImpl extends ServiceImpl<ApUserRealnameMapper,
 
 //    @Transactional(rollbackFor = Exception.class)
 
-    @GlobalTransactional(rollbackFor = Exception.class,timeoutMills = 60000)
+    @GlobalTransactional(rollbackFor = Exception.class)
     @Override
     public ResponseResult updateStatusById(AuthDto dto, Short status) {
         // 1. 检查参数  dto (id   status 2 9)

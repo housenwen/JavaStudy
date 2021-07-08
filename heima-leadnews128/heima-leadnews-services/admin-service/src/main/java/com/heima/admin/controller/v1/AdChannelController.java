@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @作者 itcast
  *
@@ -28,6 +30,15 @@ import org.springframework.web.bind.annotation.*;
 public class AdChannelController {
     @Autowired
     private AdChannelService adChannelService;
+
+
+    @ApiOperation("查询全部频道")
+    @GetMapping("/channels")
+    public ResponseResult findAll() {
+        List<AdChannel> list = adChannelService.list();
+        return ResponseResult.okResult(list);
+    }
+
     @ApiOperation(value = "根据频道名称分页查询频道列表",notes = "关于此方法的详细描述信息")
     @PostMapping("list")
     public ResponseResult findByNameAndPage(@RequestBody ChannelDto dto){

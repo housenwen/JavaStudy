@@ -51,4 +51,4 @@ file:
     max-error-retry: 5
     white-list: 127.0.0.1
     connection-timeout: 10000
-    prefix: material   # 文件夹前缀
+    prefix: material   # 文件夹前缀   OSS：   material 文件夹
