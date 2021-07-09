@@ -24,6 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,13 +39,16 @@ import java.util.List;
 @Slf4j
 @EnableConfigurationProperties(OssAliyunConfigProperties.class)
 @Import(OssAliyunAutoConfig.class)
+@Primary  // @Autowired 类型
+@Component("OSSAliyunFileStorageService")
 public class OSSAliyunFileStorageService implements FileStorageService {
 
-	@Autowired
+	@Autowired(required = false)  // 在启动时不检查Bean
     OSSClient ossClient;
 
 	@Autowired
 	OssAliyunConfigProperties ossAliyunConfigField;
+
 	public String builderOssPath(String dirPath,String filename) {
 		String separator = "/";
 		StringBuilder stringBuilder = new StringBuilder(50);
@@ -57,6 +62,20 @@ public class OSSAliyunFileStorageService implements FileStorageService {
 		stringBuilder.append(day.replace("-","")).append(separator);
 		stringBuilder.append(filename);
 		return dirPath+separator+stringBuilder.toString();
+	}
+
+
+	/**
+	 * @param prefix      文件上传前缀
+	 * @param filename    文件名称
+	 * @param contentType 文件类型 "image/jpg" 或"text/html"
+	 * @param inputStream 文件流
+	 * @return pathUrl 全路径
+	 * @Description 文件上传
+	 */
+	@Override
+	public String store(String prefix, String filename, String contentType, InputStream inputStream) {
+		return this.store(prefix, filename, inputStream);
 	}
 
 	/* (non-Javadoc)

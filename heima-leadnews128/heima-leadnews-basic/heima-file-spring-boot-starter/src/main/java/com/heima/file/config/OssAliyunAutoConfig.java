@@ -12,12 +12,10 @@ import com.aliyun.oss.common.comm.Protocol;
 import com.aliyun.oss.model.CannedAccessControlList;
 import com.aliyun.oss.model.CreateBucketRequest;
 import com.aliyun.oss.model.SetBucketLoggingRequest;
-import com.heima.file.service.FileStorageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +28,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties({OssAliyunConfigProperties.class})
 //当引入FileStorageService接口时
-@ConditionalOnClass(FileStorageService.class)
+@ConditionalOnClass({OSSClient.class})
 public class OssAliyunAutoConfig {
 
 	@Autowired
@@ -38,7 +36,7 @@ public class OssAliyunAutoConfig {
 
 
     @Bean
-	@ConditionalOnMissingBean(FileStorageService.class)
+//	@ConditionalOnMissingBean(OSSAliyunFileStorageService.class)
     public ClientConfiguration clientConfiguration() {
     	// 创建ClientConfiguration。ClientConfiguration是OSSClient的配置类，可配置代理、连接超时、最大连接数等参数。
     	ClientConfiguration conf = new ClientConfiguration();

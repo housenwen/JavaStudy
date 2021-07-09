@@ -13,6 +13,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>stream-demo</module>
+        <module>kafka-test</module>
+        <module>content-safe</module>
+        <module>freemarker-test</module>
     </modules>
 
 

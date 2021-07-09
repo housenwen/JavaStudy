@@ -20,6 +20,7 @@ import java.io.Serializable;
 public class OssAliyunConfigProperties implements Serializable {
     /***
      * 站点
+     *
      */
     private String webSite;
 
@@ -97,6 +98,7 @@ public class OssAliyunConfigProperties implements Serializable {
      * 白名单
      */
     private String whiteList;
+
 
 
 }

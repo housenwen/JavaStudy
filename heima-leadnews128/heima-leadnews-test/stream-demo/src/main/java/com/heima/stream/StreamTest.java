@@ -1,12 +1,6 @@
 package com.heima.stream;
-
-import org.junit.Test;
-
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @作者 itcast
@@ -48,7 +42,6 @@ public class StreamTest {
 //                .forEach((stu)->System.out.println(stu));// 终止操作
 //                .forEach(System.out::println);// 终止操作
                 .collect(Collectors.groupingBy(Student::getSex));
-
         System.out.println(collect);
     }
     public static List<Student> getStudentList(){

@@ -11,14 +11,24 @@ import java.util.List;
 public interface FileStorageService {
 
     /**
-     * 存文件
      * @Description 文件上传
-     * @param prefix 文件上传前缀    hello/xixi/pic.jpg
+     * @param prefix 文件上传前缀
      * @param filename 文件名称
      * @param inputStream 文件流
      * @return pathUrl 全路径
      */
     String store(String prefix, String filename, InputStream inputStream);
+
+
+    /**
+     * @Description 文件上传
+     * @param prefix 文件上传前缀
+     * @param filename 文件名称
+     * @param contentType 文件类型 "image/jpg" 或"text/html"
+     * @param inputStream 文件流
+     * @return pathUrl 全路径
+     */
+    String store(String prefix, String filename, String contentType, InputStream inputStream);
 
     /**
      * @Description 文件删除
