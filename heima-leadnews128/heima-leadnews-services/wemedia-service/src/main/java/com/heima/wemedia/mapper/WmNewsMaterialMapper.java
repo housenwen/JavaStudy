@@ -14,5 +14,4 @@ public interface WmNewsMaterialMapper extends BaseMapper<WmNewsMaterial> {
     public void saveRelations(@Param("wmMaterialIds") List<Integer> wmMaterialIds,
                               @Param("newsId") Integer newsId,
                               @Param("type") Short type);
-
 }

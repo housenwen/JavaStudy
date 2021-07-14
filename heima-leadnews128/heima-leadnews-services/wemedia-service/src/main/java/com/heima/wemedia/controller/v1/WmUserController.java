@@ -36,4 +36,10 @@ public class WmUserController {
         WmUser wmUser = wmUserService.getOne(Wrappers.<WmUser>lambdaQuery().eq(WmUser::getName, name));
         return ResponseResult.okResult(wmUser);
     }
+
+    @ApiOperation("根据id查询自媒体用户信息")
+    @GetMapping("/findOne/{id}")
+    public ResponseResult<WmUser> findWmUserById(@PathVariable("id") Integer id) {
+        return ResponseResult.okResult(wmUserService.getById(id));
+    }
 }

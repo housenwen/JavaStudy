@@ -10,8 +10,9 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public class HelloListener {
-    @KafkaListener(topics = "heima-002")
+    @KafkaListener(topics = "heima-002",errorHandler = "kafkaDefaultListenerErrorHandler")
     public void messageHandler(ConsumerRecord<String,String> record){
+        System.out.println(1/0);
         System.out.println("消息的key: " + record.key() + "  消息的value: "+record.value());
     }
 }

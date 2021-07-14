@@ -31,3 +31,9 @@ spring:
             - Path=/user/**
           filters:
             - StripPrefix= 1
+        - id: wemedia
+          uri: lb://leadnews-wemedia
+          predicates:
+            - Path=/wemedia/**
+          filters:
+            - StripPrefix= 1

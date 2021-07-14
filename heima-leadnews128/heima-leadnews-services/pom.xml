@@ -18,6 +18,11 @@
         <module>article-service</module>
     </modules>
     <dependencies>
+        <!-- kafkfa -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
         <!-- 远程调用feign的统一依赖 -->
         <dependency>
             <artifactId>heima-leadnews-feign</artifactId>

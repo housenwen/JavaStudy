@@ -3,6 +3,12 @@ server:
 spring:
   application:
     name: leadnews-wemedia
+  kafka:
+    bootstrap-servers: 192.168.200.130:9092
+    producer:
+      retries: 1
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
   cloud:
     nacos:
       discovery:
@@ -58,3 +64,6 @@ file:
     bucket: hmtt128
     endpoint: http://192.168.200.130:9090/
     readPath: http://192.168.200.130:9090/
+feign:
+  hystrix:
+    enabled: true # 开启熔断

@@ -16,6 +16,7 @@
         <module>kafka-test</module>
         <module>content-safe</module>
         <module>freemarker-test</module>
+        <module>springtask-test</module>
     </modules>
 
 

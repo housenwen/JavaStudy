@@ -16,6 +16,8 @@
         <module>heima-seata-spring-boot-starter</module>
         <module>heima-file-spring-boot-starter</module>
         <module>heima-aliyunsecurity-spring-boot-starter</module>
+        <module>heima-schedule-spring-boot-starter</module>
+        <module>heima-cache-spring-boot-starter</module>
     </modules>
 
 </project>

@@ -3,6 +3,10 @@ server:
 spring:
   application:
     name: leadnews-user
+  redis:
+    host: 192.168.200.130
+    port: 6379
+    password: root
   cloud:
     nacos:
       discovery:

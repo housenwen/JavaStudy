@@ -1,37 +1,42 @@
 package com.heima.wemedia.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.heima.common.constants.message.NewsAutoScanConstants;
+import com.heima.common.constants.message.WmNewsMessageConstants;
 import com.heima.common.constants.wemedia.WemediaConstants;
 import com.heima.common.exception.CustException;
 import com.heima.model.common.dtos.PageResponseResult;
 import com.heima.model.common.dtos.ResponseResult;
 import com.heima.model.common.enums.AppHttpCodeEnum;
 import com.heima.model.threadlocal.WmThreadLocalUtils;
+import com.heima.model.wemedia.dtos.NewsAuthDto;
 import com.heima.model.wemedia.dtos.WmNewsDto;
 import com.heima.model.wemedia.dtos.WmNewsPageReqDto;
 import com.heima.model.wemedia.pojos.WmMaterial;
 import com.heima.model.wemedia.pojos.WmNews;
 import com.heima.model.wemedia.pojos.WmNewsMaterial;
 import com.heima.model.wemedia.pojos.WmUser;
+import com.heima.model.wemedia.vos.WmNewsVo;
 import com.heima.wemedia.mapper.WmMaterialMapper;
 import com.heima.wemedia.mapper.WmNewsMapper;
 import com.heima.wemedia.mapper.WmNewsMaterialMapper;
 import com.heima.wemedia.service.WmNewsService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -39,10 +44,17 @@ import java.util.stream.Collectors;
  * @创建日期 2021/7/8 10:33
  **/
 @Service
+@Slf4j
 public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> implements WmNewsService {
 
     @Value("${file.oss.web-site}")
     String webSite;
+
+    @Autowired
+    KafkaTemplate<String,String> kafkaTemplate;
+
+    @Autowired
+    WmNewsMapper wmNewsMapper;
 
     @Override
     public ResponseResult findList(WmNewsPageReqDto dto) {
@@ -94,6 +106,7 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
      * @param wmNewsDto
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public ResponseResult submitNews(WmNewsDto wmNewsDto) {
         // 1. 校验参数  (基于dto创建WmNews)
@@ -141,9 +154,14 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
         }
         // 3.3 保存文章封面和素材的关联关系
         saveRelativeInfoForCover(wmNewsDto,wmNews,contentUrlList);
+
+        // 发送自动审核文章的消息通知
+        Map map = new HashMap();
+        map.put("wmNewsId",wmNews.getId());
+        kafkaTemplate.send(NewsAutoScanConstants.WM_NEWS_AUTO_SCAN_TOPIC, JSON.toJSONString(map));
+        log.info("自动审核的消息通知成功发送  主题:{}  文章id:{}",NewsAutoScanConstants.WM_NEWS_AUTO_SCAN_TOPIC,wmNews.getId());
         return ResponseResult.okResult();
     }
-
     @Override
     public ResponseResult findWmNewsById(Integer id) {
         // 1. 检查id
@@ -207,10 +225,79 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
                 .set(WmNews::getEnable,enable)
                 .eq(WmNews::getId,dto.getId()));
         // 5. 返回结果
-        // TODO  同步app端文章上下架
-
+        // TODO  同步app端文章上下架    enable 1: 上架   0: 下架
+        if(wmNews.getArticleId()!=null){
+            Map map = new HashMap();
+            map.put("articleId",wmNews.getArticleId());
+            map.put("enable",enable);
+            kafkaTemplate.send(WmNewsMessageConstants.WM_NEWS_UP_OR_DOWN_TOPIC,JSON.toJSONString(map));
+            log.info(" 发送文章上下架消息 到主题: {} , 消息内容: {} ",WmNewsMessageConstants.WM_NEWS_UP_OR_DOWN_TOPIC,map);
+        }
         // TODO  同步es索引库文章信息
 
+        return ResponseResult.okResult();
+    }
+
+    @Override
+    public ResponseResult<List<Integer>> findRelease() {
+        // 1. 查询状态为 4 或 8   并且  发布时间  小于等于当前时间
+        List<WmNews> list = list(Wrappers.<WmNews>lambdaQuery()
+                .in(WmNews::getStatus, 8, 4)
+                .le(WmNews::getPublishTime, new Date())
+                .select(WmNews::getId)  // 只查询wmNew的id字段
+        );
+        List<Integer> newsIds = list.stream()
+                .map(WmNews::getId)
+                .collect(Collectors.toList());
+        return ResponseResult.okResult(newsIds);
+    }
+
+    @Override
+    public ResponseResult findList(NewsAuthDto dto) {
+        // 1. 参数校验
+        dto.checkParam();
+        if(StringUtils.isNotBlank(dto.getTitle())){
+            dto.setTitle("%"+dto.getTitle()+"%");
+        }
+        Integer page = dto.getPage(); // 第几页
+        dto.setPage( (page - 1) * dto.getSize() ); // 计算偏移量
+        // 3. 调用mapper查询 list  查询 总数量
+        List<WmNewsVo> listAndPage = wmNewsMapper.findListAndPage(dto);
+        long count = wmNewsMapper.findListCount(dto);
+        // 4. 封装分页返回结果
+        PageResponseResult responseResult = new PageResponseResult(page,dto.getSize(),count,listAndPage);
+        return responseResult;
+    }
+
+    @Override
+    public ResponseResult findWmNewsVo(Integer id) {
+        return ResponseResult.okResult(wmNewsMapper.findWmNewsVo(id));
+    }
+
+    /**
+     * 人工审核方法
+     * @param dto  id 文章     msg 拒绝原因
+     * @param status  2.失败   4 通过
+     * @return
+     */
+    @Override
+    public ResponseResult updateStatus(NewsAuthDto dto, Short status) {
+        // 1. 校验参数 id
+        if(dto.getId() == null){
+            CustException.cust(AppHttpCodeEnum.PARAM_INVALID,"文章id不能为空");
+        }
+        // 2. 根据id查询wmNews
+        WmNews wmNews = getById(dto.getId());
+        if(wmNews == null){
+            CustException.cust(AppHttpCodeEnum.DATA_NOT_EXIST,"文章信息不存在");
+        }
+        // 3. 修改状态和原因
+        wmNews.setStatus(status);
+        if(StringUtils.isNotBlank(dto.getMsg())){
+            wmNews.setReason(dto.getMsg());
+        }
+        updateById(wmNews);
+        // 4. 返回结果
         return ResponseResult.okResult();
     }
 

@@ -3,10 +3,21 @@ server:
 spring:
   application:
     name: leadnews-admin
+  kafka:
+    bootstrap-servers: 192.168.200.130:9092
+    consumer:
+      group-id: ${spring.application.name}-kafka-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   cloud:
     nacos:
       discovery:
         server-addr: 192.168.200.130:8848
+    alibaba:
+      seata:
+        tx-service-group: heima_leadnews_tx_group
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://192.168.200.130:3306/leadnews_admin?useUnicode=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
@@ -17,3 +28,23 @@ mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
   # 设置别名包扫描路径，通过该属性可以给包中的类注册别名
   type-aliases-package: com.heima.model.admin.pojos
+file:
+  oss:
+    web-site: https://hmtt128.oss-cn-shanghai.aliyuncs.com/
+hystrix:
+  command:
+    default:
+      execution.isolation.thread.timeoutInMilliseconds: 5000 # 设置线程隔离时间
+ribbon:
+  ReadTimeout: 5000   # 读取超时时长
+  ConnectTimeout: 2000   # 建立链接的超时时长
+feign:
+  hystrix:
+    enabled: true
+xxljob:
+  admin:
+    addresses: http://192.168.200.130:8888/xxl-job-admin
+  executor:
+    appname: leadnews-admin-executor
+    port: 9999
+    logPath: D://xxljob/logs
